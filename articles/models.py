@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.urls import reverse
 
 class Article(models.Model):
@@ -13,34 +14,40 @@ class Article(models.Model):
     verbose_name="الرابط (Slug)"
   )
 
-  content = models.TextField(
+  content= models.TextField(
     verbose_name="محتوى المقال"
   )
 
-  image = models.ImageField(
+  image= models.ImageField(
     upload_to='articles/%Y/%m/%d/',
     verbose_name="صورة المقال"
   )
 
-  is_published = models.BooleanField(
+  is_published= models.BooleanField(
     default=True,
     verbose_name="أنشر؟"
   )
 
-  seo_description = models.CharField(
+  seo_description= models.CharField(
     max_length=160,
     blank=True,
     null=True,
     verbose_name="وصف لمحركات البحث (SEO)"
   )
 
-  created_at = models.DateTimeField(
+  created_at= models.DateTimeField(
     auto_now_add=True,
     verbose_name="تاريخ الإضافة"
   )
-  updated_at = models.DateTimeField(
+  updated_at= models.DateTimeField(
     auto_now=True,
     verbose_name="تاريخ التعديل"
+  )
+  
+  author= models.ForeignKey(
+    User,
+    on_delete= models.CASCADE,
+    verbose_name="الكاتب"
   )
   
   class Meta:
