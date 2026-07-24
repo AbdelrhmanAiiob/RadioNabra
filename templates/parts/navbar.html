@@ -1,7 +1,7 @@
-{# Top mini bar (Responsive for Mobile & Desktop) #}
+<!-- Top mini bar -->
 <div class="bg-gray-50 border-b border-gray-100 text-[10px] sm:text-[11px] py-1.5">
     <div class="container mx-auto px-4 flex justify-between items-center text-gray-500">
-        {# Social Icons #}
+        <!-- Social Icons -->
         <div class="flex items-center gap-3 text-[#cba358]">
             <a href="https://www.facebook.com/RadioNabra/" target="_blank" class="hover:text-[#b8914b] transition transform hover:scale-110" title="Facebook">
                 <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.324V1.325C24 .597 23.403 0 22.675 0z"/></svg>
@@ -10,25 +10,20 @@
                 <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
             </a>
         </div>
-        <div class="font-medium tracking-wide">
-            صوت الصحافة للمقالات والبودكاست
-        </div>
+        <div class="font-medium tracking-wide">صوت الصحافة للمقالات والبودكاست</div>
     </div>
 </div>
 
-{# Main Navbar #}
+<!-- Main Navbar -->
 <nav class="bg-white shadow-xs sticky top-0 z-50 w-full overflow-x-hidden border-b border-gray-100">
     <div class="container mx-auto px-3 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-14 sm:h-16">
             
-            {# Left Side: Logo & Mobile Hamburger Menu Button #}
+            <!-- Left Side -->
             <div class="flex items-center gap-3">
-                {# Hamburger Button for Mobile #}
-                <button id="menu-toggle" class="lg:hidden text-gray-600 hover:text-[#cba358] focus:outline-none p-1" type="button" title="القائمة">
+                <button id="menu-toggle" class="lg:hidden text-gray-600 hover:text-[#cba358] focus:outline-none p-1" type="button" title="Menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
-
-                {# Logo #}
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{% url 'articles:list' %}" class="text-lg sm:text-2xl font-black text-gray-800 tracking-tighter hover:text-[#cba358] transition flex items-center gap-1">
                         <span class="text-[#cba358]">راديو</span> نبرة
@@ -36,7 +31,7 @@
                 </div>
             </div>
             
-            {# Nav Links (Desktop) #}
+            <!-- Desktop Links -->
             <div class="hidden lg:flex space-x-6 space-x-reverse items-center text-xs font-semibold">
                 <a href="{% url 'articles:list' %}" class="text-[#cba358] font-bold border-b-2 border-[#cba358] pb-0.5">الرئيسية</a>
                 <a href="#" class="text-gray-600 hover:text-[#cba358] transition">الأخبار</a>
@@ -45,23 +40,21 @@
                 <a href="mailto:radionabra@gmail.com" class="text-gray-600 hover:text-[#cba358] transition">تواصل معنا</a>
             </div>
             
-            {# Search Bar Container #}
+            <!-- Search -->
             <div class="flex items-center gap-2">
                 <div class="flex items-center gap-1.5 relative" id="search-wrapper">
                     <form action="{% url 'articles:list' %}" method="GET" id="search-form" class="overflow-hidden transition-all duration-300 ease-out w-0 opacity-0 flex items-center bg-gray-50 rounded-full border border-gray-200 py-0.5 px-2">
                         <input type="text" name="q" id="search-input" value="{{ request.GET.q|default:'' }}" class="bg-transparent text-gray-700 text-xs block w-24 sm:w-36 py-1 px-1 outline-none placeholder-gray-400" placeholder="ابحث...">
                     </form>
-                    
-                    <button id="search-toggle" class="text-gray-400 hover:text-[#cba358] transition rounded-full shrink-0 p-1 bg-white relative z-10" type="button" title="بحث">
+                    <button id="search-toggle" class="text-gray-400 hover:text-[#cba358] transition rounded-full shrink-0 p-1 bg-white relative z-10" type="button" title="Search">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </button>
                 </div>
             </div>
-            
         </div>
     </div>
 
-    {# Mobile Dropdown Menu (Hidden by default) #}
+    <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 px-4 pt-3 pb-4 space-y-2 text-xs font-semibold shadow-lg">
         <a href="{% url 'articles:list' %}" class="block py-2 text-[#cba358] font-bold border-b border-gray-50">الرئيسية</a>
         <a href="#" class="block py-2 text-gray-600 hover:text-[#cba358] transition border-b border-gray-50">الأخبار</a>
@@ -70,65 +63,3 @@
         <a href="mailto:radionabra@gmail.com" class="block py-2 text-gray-600 hover:text-[#cba358] transition">تواصل معنا</a>
     </div>
 </nav>
-
-{# Scripts for Search & Mobile Menu #}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchToggle = document.getElementById('search-toggle');
-        const searchForm = document.getElementById('search-form');
-        const searchInput = document.getElementById('search-input');
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        let typingTimer;
-        const doneTypingInterval = 500; 
-
-        // التحكم في فتح وغلق قائمة الموبايل (Hamburger Menu)
-        menuToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // إغلاق قائمة الموبايل عند الضغط في أي مكان خارجها
-        document.addEventListener('click', function(e) {
-            if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                mobileMenu.classList.add('hidden');
-            }
-        });
-
-        // التحكم في شريط البحث (يفتح فقط بالضغط على العدسة ولن يفتح تلقائياً إلا لو المستخدم يكتب)
-        searchToggle.addEventListener('click', function(e) {
-            e.stopPropagation(); 
-            if (searchForm.classList.contains('w-0')) {
-                searchForm.classList.remove('w-0', 'opacity-0');
-                searchForm.classList.add('w-28', 'sm:w-36', 'opacity-100'); 
-                searchInput.focus(); 
-            } else {
-                searchForm.classList.add('w-0', 'opacity-0');
-                searchForm.classList.remove('w-28', 'sm:w-36', 'opacity-100');
-            }
-        });
-
-        // Live Search with Debounce
-        searchInput.addEventListener('input', function() {
-            clearTimeout(typingTimer);
-            typingTimer = setTimeout(function() {
-                searchForm.submit(); 
-            }, doneTypingInterval);
-        });
-
-        searchInput.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!searchForm.contains(e.target) && !searchToggle.contains(e.target)) {
-                // لو حقل البحث فاضي ومافيش كويري باحثين بيها، نقفله
-                const urlParams = new URLSearchParams(window.location.search);
-                if (!urlParams.has('q') || urlParams.get('q').trim() === '') {
-                    searchForm.classList.add('w-0', 'opacity-0');
-                    searchForm.classList.remove('w-28', 'sm:w-36', 'opacity-100');
-                }
-            }
-        });
-    });
-</script>
