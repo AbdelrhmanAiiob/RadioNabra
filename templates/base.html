@@ -1,32 +1,102 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RadioNabra</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {},
-        },
-        plugins: [],
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO -->
+  <meta name="author" content="Aiiob">
+  <meta name="description" content="منصة مقالات متطورة مبنية بإطار عمل Django">
+  
+  <!--
+    ===========================================
+    Built with ❤️ by [Abdelrhman Aiiob]
+    Backend Developer: Python / Django
+    Email: aiiob@icloud.com or abdelrhmanaiiob@gmail.com
+    GitHub: https://github.com/AbdelrhmanAiiob
+    ===========================================
+  -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+  /* أنيميشن الشريط المتحرك (من اليسار لليمين للقراءة العربية) */
+/* أنيميشن الشريط المتحرك (يظهر فوراً بدون أي تأخير) */
+/* أنيميشن الشريط المتحرك */
+      @keyframes seamlessTicker {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0%); }
       }
-    </script>
+      .animate-ticker {
+          display: flex;
+          width: max-content;
+          /* قللنا الوقت لـ 15 ثانية بدل 30 عشان يبقى أسرع */
+          animation: seamlessTicker 5s linear infinite;
+          will-change: transform;
+      }
+      .pause-on-hover:hover {
+          animation-play-state: paused;
+      }
+      /* الإجبار على استخدام خط كايرو بمسافات مريحة للعين */
+      body, h1, h2, h3, h4, h5, h6, p, a, span, div, button {
+          font-family: 'Cairo', sans-serif !important;
+      }
+
+      /* 1. أنيميشن ظهور المقالات (نطة خفيفة من تحت لفوق) */
+      @keyframes popIn {
+          0% { opacity: 0; transform: translateY(40px); }
+          100% { opacity: 1; transform: translateY(0); }
+      }
+      .animate-pop-in {
+          animation: popIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          opacity: 0; /* بيبدأ مخفي عشان يظهر بنعومة */
+      }
+
+      /* 2. أنيميشن رسم الخط تحت العنوان */
+      @keyframes drawLine {
+          0% { width: 0; left: 50%; transform: translateX(-50%); opacity: 0;}
+          100% { width: 40%; left: 50%; transform: translateX(-50%); opacity: 1;}
+      }
+      .animate-draw-line {
+          animation: drawLine 0.8s ease-out forwards;
+          animation-delay: 0.2s; 
+          width: 0; 
+      }
+
+      /* 3. أنيميشن نبض/زووم خفيف مستمر لزرار الإضافة (Zoom Sika) */
+      @keyframes softZoom {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+      }
+      .animate-soft-zoom {
+          animation: softZoom 2.5s infinite ease-in-out;
+      }
+      .force-wrap-content, .force-wrap-content * {
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        word-break: break-all !important; /* بيكسر الكلمة المتصلة غصب عنها */
+        white-space: pre-wrap !important;
+        max-width: 100% !important; /* بيمنع العنصر إنه يتمد بره الشاشة */
+    }
+      .hide-scrollbar::-webkit-scrollbar { display: none; }
+      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+
+  <title>{% block title %}{% endblock title %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-900 font-sans">
 
-    {% include 'parts/navbar.html' %}
-    
-    <main class="container mx-auto px-4 py-8">
-        {% block content %}
-        {% endblock content %}
-    </main>
+<!-- footer always bottom -->
+<body class="flex flex-col min-h-screen bg-gray-100 text-gray-900 font-sans antialiased">
 
-    {% include 'parts/footer.html' %}
+  {% include 'parts/navbar.html' %}
+
+  <!-- changing data -->
+  <main class="flex-grow container mx-auto mt-10 px-4 mb-20">
+    {% block content %}
+    {% endblock content %}
+  </main>
+
+  {% include 'parts/footer.html' %}
 
 </body>
 </html>

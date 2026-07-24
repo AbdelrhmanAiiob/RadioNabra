@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block title %}راديو نبرة - المقالات{% endblock %}
+
+{% block content %}
+
+{# ستايل الشريط اللانهائي #}
+<style>
+    @keyframes infinite-scroll-rtl {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(100%); }
+    }
+    .animate-infinite-ticker {
+        display: flex;
+        animation: infinite-scroll-rtl 20s linear infinite;
+        width: max-content;
+    }
+    .pause-on-hover:hover .animate-infinite-ticker {
+        animation-play-state: paused;
+    }
+</style>
+
+{# 1. هيدر الصفحة #}
+<div class="mb-12 text-center mt-6">
+    <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-6 relative inline-block pb-3">
+        {% if request.GET.q %}
+            نتائج البحث عن: "{{ request.GET.q }}"
+        {% else %}
+            آخر الأخبار والمقالات
+        {% endif %}
+        <span class="absolute bottom-0 w-full left-0 h-1 bg-[#cba358] rounded-full animate-draw-line"></span>
+    </h1>
+    {% if request.GET.q %}
+        <div class="mt-2">
+            <a href="{% url 'articles:list' %}" class="text-xs text-[#cba358] hover:underline font-semibold">← إرجاع كل المقالات</a>
+        </div>
+    {% endif %}
+</div>
+
+{# 2. شبكة المقالات (Cards) #}
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
+    {% for article in articles %}
+        <div class="animate-pop-in bg-white rounded-xl shadow-xs border border-gray-100 hover:shadow-md transition-all duration-300 overflow-hidden group flex flex-col relative" style="animation-delay: calc({{ forloop.counter }} * 80ms);">
+            
+            {% if article.is_new %}
+                <span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-md z-10 shadow-xs animate-pulse">جديد ⚡</span>
+            {% else %}
+                <span class="absolute top-3 right-3 bg-[#cba358] text-white text-[10px] font-bold px-2 py-1 rounded-md z-10 shadow-xs">مقال حصري</span>
+            {% endif %}
+
+            <a href="{% url 'articles:detail' article.slug %}" class="block overflow-hidden relative">
+                {% if article.image %}
+                    <img src="{{ article.image.url }}" alt="{{ article.title }}" class="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out">
+                {% else %}
+                    <div class="w-full h-44 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center text-[#cba358]">
+                        <svg class="w-10 h-10 opacity-40" fill="currentColor" viewBox="0 0 20 20"><path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"></path></svg>
+                    </div>
+                {% endif %}
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-5 transition duration-300"></div>
+            </a>
+            
+            <div class="p-4 sm:p-5 flex flex-col flex-grow bg-white">
+                {# التعديل هنا: إضافة break-words و break-all للعنوان #}
+                <h2 class="text-base sm:text-lg font-bold text-gray-900 mb-2 line-clamp-2 leading-snug break-words break-all">
+                    <a href="{% url 'articles:detail' article.slug %}" class="hover:text-[#cba358] transition duration-200">{{ article.title }}</a>
+                </h2>
+                
+                {# التعديل هنا: إضافة break-words و break-all للملخص #}
+                <p class="text-gray-500 text-xs sm:text-sm mb-4 flex-grow leading-relaxed line-clamp-3 break-words break-all">
+                    {{ article.content|striptags|truncatewords:15 }}
+                </p>
+                
+                <div class="flex justify-between items-center text-xs font-semibold border-t border-gray-50 pt-3 mt-auto">
+                    <span class="text-[#cba358] flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                        {{ article.author.username }}
+                    </span>
+                    <span class="text-gray-400 text-[11px]">{{ article.created_at|date:"d M Y" }}</span>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-span-full text-center py-16 bg-white rounded-xl shadow-xs border border-gray-100 animate-pop-in">
+            <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+            <p class="text-gray-500 text-sm font-medium">عذراً، لم يتم العثور على أي مقالات تطابق بحثك.</p>
+        </div>
+    {% endfor %}
+</div>
+
+{# 3. الشريط المتحرك (أحدث المقالات - تكرار لا نهائي) #}
+<div class="max-w-4xl mx-auto mb-16 bg-white border border-gray-100 rounded-lg sm:rounded-xl shadow-sm flex items-center overflow-hidden h-7 sm:h-10 relative pause-on-hover">
+    {# محتوى الشريط زي ما هو بدون تغيير #}
+    <div class="bg-gradient-to-r from-[#cba358] to-[#d4af37] text-white font-bold px-2 sm:px-4 h-full flex items-center relative z-20 shadow-sm shrink-0 text-[9px] sm:text-xs">
+        <span class="relative z-10 flex items-center gap-1">
+            <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            أحدث المقالات
+        </span>
+        <span class="absolute left-[-6px] sm:left-[-8px] top-1/2 transform -translate-y-1/2 border-[4px] sm:border-[5px] border-transparent border-r-[#cba358]"></span>
+    </div>
+    <div class="flex-grow overflow-hidden relative h-full flex items-center w-full z-10" dir="ltr">
+        <div class="animate-infinite-ticker gap-4 sm:gap-6 pl-2 sm:pl-4 text-[9px] sm:text-xs font-semibold whitespace-nowrap flex items-center" dir="rtl">
+            {% for article in articles|slice:":5" %}
+                <a href="{% url 'articles:detail' article.slug %}" class="flex items-center gap-1 sm:gap-1.5 text-gray-600 hover:text-[#cba358] transition duration-300 whitespace-nowrap">
+                    <span class="w-1 h-1 rounded-full bg-[#cba358] inline-block"></span>
+                    {{ article.title }}
+                    {% if article.is_new %}<span class="bg-red-500 text-white text-[7px] sm:text-[8px] px-1 py-0.5 rounded-sm animate-pulse ml-1">جديد</span>{% endif %}
+                </a>
+            {% endfor %}
+            {% for article in articles|slice:":5" %}
+                <a href="{% url 'articles:detail' article.slug %}" class="flex items-center gap-1 sm:gap-1.5 text-gray-600 hover:text-[#cba358] transition duration-300 whitespace-nowrap">
+                    <span class="w-1 h-1 rounded-full bg-[#cba358] inline-block"></span>
+                    {{ article.title }}
+                    {% if article.is_new %}<span class="bg-red-500 text-white text-[7px] sm:text-[8px] px-1 py-0.5 rounded-sm animate-pulse ml-1">جديد</span>{% endif %}
+                </a>
+            {% endfor %}
+            {% for article in articles|slice:":5" %}
+                <a href="{% url 'articles:detail' article.slug %}" class="flex items-center gap-1 sm:gap-1.5 text-gray-600 hover:text-[#cba358] transition duration-300 whitespace-nowrap">
+                    <span class="w-1 h-1 rounded-full bg-[#cba358] inline-block"></span>
+                    {{ article.title }}
+                    {% if article.is_new %}<span class="bg-red-500 text-white text-[7px] sm:text-[8px] px-1 py-0.5 rounded-sm animate-pulse ml-1">جديد</span>{% endif %}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{# 4. الترقيم (Pagination) #}
+{% if is_paginated %}
+    <div class="mt-8 flex justify-center items-center gap-2">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-full hover:border-[#cba358] hover:text-[#cba358] transition shadow-xs text-xs font-bold">&rarr;</a>
+        {% endif %}
+        <span class="px-4 py-1.5 bg-gradient-to-r from-[#cba358] to-[#d4af37] text-white rounded-full text-xs font-bold shadow-xs">{{ page_obj.number }}</span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-full hover:border-[#cba358] hover:text-[#cba358] transition shadow-xs text-xs font-bold">&larr;</a>
+        {% endif %}
+    </div>
+{% endif %}
+{% endblock %}
+
+```
+
+---
+
+### 2. التعديل الأهم: صفحة تفاصيل المقال (`article_detail.html`)
+
+السر كله في كلاس `min-w-0` اللي بيمنع الحاوية تتمد، وكلاس `break-all` اللي بيكسر الكلمة غصب عنها مهما كانت طويلة. افتح ملف `article_detail.html` واستبدل سكشن **محتوى المقال** وسكشن **قائمة التعليقات** بالكود ده:
+
+```html
+{# --- محتوى المقال (الحل الجذري لخروج النص عن الشاشة) --- #}
+<div class="text-gray-700 leading-relaxed sm:leading-loose text-base sm:text-lg font-normal break-words break-all overflow-hidden space-y-4">
+    {{ article.content|safe }}
+</div>
+
+<!-- باقي أكواد الصفحة لحد ما تنزل للتعليقات -->
+
+{# --- قائمة التعليقات السابقة --- #}
+<div class="space-y-4">
+    {% for comment in comments %}
+        <div class="bg-gray-50/60 p-4 sm:p-5 rounded-2xl border border-gray-100 flex gap-3 sm:gap-4 items-start overflow-hidden">
+            
+            {# الأفاتار #}
+            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#cba358] text-white font-bold text-sm sm:text-base flex items-center justify-center shrink-0 shadow-xs">
+                {{ comment.username|first|upper }}
+            </div>
+            
+            {# محتوى التعليق #}
+            <div class="flex-grow min-w-0"> {# التعديل السحري هنا: min-w-0 بيمنع الفليكس يتمد بره الشاشة #}
+                <div class="flex items-center justify-between mb-1">
+                    <h5 class="font-bold text-gray-900 text-sm truncate">{{ comment.username }}</h5>
+                    <span class="text-[10px] text-gray-400 font-medium whitespace-nowrap ml-2">{{ comment.comment_date|date:"d M Y - H:i" }}</span>
+                </div>
+                {# إجبار النص على الكسر break-words break-all #}
+                <p class="text-gray-700 text-xs sm:text-sm leading-relaxed break-words break-all whitespace-pre-line">
+                    {{ comment.comment }}
+                </p>
+            </div>
+        </div>
+    {% empty %}
+        <!-- كود حالة عدم وجود تعليقات -->
+    {% endfor %}
+</div>
+
+```
