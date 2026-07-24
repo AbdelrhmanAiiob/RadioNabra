@@ -78,7 +78,7 @@ class Article(models.Model):
 class Comment(models.Model):
   username= models.CharField(
     max_length=50,
-    default='unknown' 
+    default='غير معروف' 
   )
   email = models.EmailField(
     blank=True,
@@ -86,7 +86,7 @@ class Comment(models.Model):
   )
   comment= models.TextField(
     max_length=500,
-    default= 'Unknown'
+    default= 'غير معروف'
   )
   active = models.BooleanField(
     default=True

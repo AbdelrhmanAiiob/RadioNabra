@@ -57,23 +57,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    /* --- Related Articles Slider Logic --- */
+/* --- Related Articles Slider Logic --- */
     const slider = document.getElementById('related-slider');
     if (slider) {
-        let autoScrollTimer;
+        let autoScrollReq;
+        const scrollSpeed = 1.5; 
+
+        function autoScroll() {
+            slider.scrollLeft -= scrollSpeed; 
+            
+            if (Math.abs(slider.scrollLeft) >= (slider.scrollWidth - slider.clientWidth) - 2) {
+                slider.scrollLeft = 0; 
+            }
+            autoScrollReq = requestAnimationFrame(autoScroll);
+        }
 
         function startAutoScroll() {
-            autoScrollTimer = setInterval(function() {
-                slider.scrollLeft -= 1; 
-                
-                if (Math.abs(slider.scrollLeft) >= (slider.scrollWidth - slider.clientWidth) - 2) {
-                    slider.scrollLeft = 0; 
-                }
-            }, 30);
+            if (!autoScrollReq) {
+                autoScrollReq = requestAnimationFrame(autoScroll);
+            }
         }
 
         function stopAutoScroll() {
-            clearInterval(autoScrollTimer);
+            cancelAnimationFrame(autoScrollReq);
+            autoScrollReq = null;
         }
 
         startAutoScroll();

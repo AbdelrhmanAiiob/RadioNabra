@@ -51,9 +51,12 @@ class ArticleDetailView(DetailView):
     
     data = request.POST.copy()
     
-    # if not username insert => 'unknown'
     if not data.get('username') or data.get('username').strip() == '':
-      data['username'] = 'unknown'
+      data['username'] = 'غير معروف'
+    else:
+      data['username'] = data['username'].strip()
+    if data.get('comment'):
+      data['comment'] = data.get('comment').strip()
     form = CommentForm(data)
     
     if form.is_valid():

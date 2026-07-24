@@ -76,17 +76,32 @@
         </span>
         <span class="absolute left-[-6px] sm:left-[-8px] top-1/2 transform -translate-y-1/2 border-[4px] sm:border-[5px] border-transparent border-r-[#cba358]"></span>
     </div>
+    
     <div class="flex-grow overflow-hidden relative h-full flex items-center w-full z-10" dir="ltr">
-        <div class="animate-infinite-ticker gap-4 sm:gap-6 pl-2 sm:pl-4 text-[9px] sm:text-xs font-semibold whitespace-nowrap flex items-center" dir="rtl">
-            {% for _ in "123" %}
+        <div class="animate-infinite-ticker gap-4 sm:gap-6 pl-2 sm:pl-4 text-[9px] sm:text-xs font-semibold flex items-center w-max" dir="rtl">
+            
+            <!-- Group 1 -->
+            <div class="flex items-center gap-4 sm:gap-6 whitespace-nowrap">
                 {% for article in articles|slice:":5" %}
-                    <a href="{% url 'articles:detail' article.slug %}" class="flex items-center gap-1 sm:gap-1.5 text-gray-600 hover:text-[#cba358] transition duration-300 whitespace-nowrap">
+                    <a href="{% url 'articles:detail' article.slug %}" class="flex items-center gap-1 sm:gap-1.5 text-gray-600 hover:text-[#cba358] transition duration-300">
                         <span class="w-1 h-1 rounded-full bg-[#cba358] inline-block"></span>
                         {{ article.title }}
                         {% if article.is_new %}<span class="bg-red-500 text-white text-[7px] sm:text-[8px] px-1 py-0.5 rounded-sm animate-pulse ml-1">جديد</span>{% endif %}
                     </a>
                 {% endfor %}
-            {% endfor %}
+            </div>
+
+            <!-- Group 2 (نسخة طبق الأصل عشان اللحام يكون مخفي) -->
+            <div class="flex items-center gap-4 sm:gap-6 whitespace-nowrap" aria-hidden="true">
+                {% for article in articles|slice:":5" %}
+                    <a href="{% url 'articles:detail' article.slug %}" class="flex items-center gap-1 sm:gap-1.5 text-gray-600 hover:text-[#cba358] transition duration-300" tabindex="-1">
+                        <span class="w-1 h-1 rounded-full bg-[#cba358] inline-block"></span>
+                        {{ article.title }}
+                        {% if article.is_new %}<span class="bg-red-500 text-white text-[7px] sm:text-[8px] px-1 py-0.5 rounded-sm animate-pulse ml-1">جديد</span>{% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+            
         </div>
     </div>
 </div>
