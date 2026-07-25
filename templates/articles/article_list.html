@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}راديو نبرة - المقالات{% endblock %}
 
@@ -34,11 +35,9 @@
 
             <a href="{% url 'articles:detail' article.slug %}" class="block overflow-hidden relative">
                 {% if article.image %}
-                    <img src="{{ article.image.url }}" alt="{{ article.title }}" class="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out">
+                    <img src="{{ article.image.url }}" alt="{{ article.title }}" class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out">
                 {% else %}
-                    <div class="w-full h-44 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center text-[#cba358]">
-                        <svg class="w-10 h-10 opacity-40" fill="currentColor" viewBox="0 0 20 20"><path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"></path></svg>
-                    </div>
+                    <img src="{% static 'images/article_default_profile_avatar.webp' %}" alt="{{ article.title }}" class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out">
                 {% endif %}
                 <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-5 transition duration-300"></div>
             </a>
@@ -69,6 +68,7 @@
 
 <!-- Ticker -->
 <div class="max-w-4xl mx-auto mb-16 bg-white border border-gray-100 rounded-lg sm:rounded-xl shadow-sm flex items-center overflow-hidden h-7 sm:h-10 relative pause-on-hover">
+    
     <div class="bg-gradient-to-r from-[#cba358] to-[#d4af37] text-white font-bold px-2 sm:px-4 h-full flex items-center relative z-20 shadow-sm shrink-0 text-[9px] sm:text-xs">
         <span class="relative z-10 flex items-center gap-1">
             <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
@@ -78,12 +78,12 @@
     </div>
     
     <div class="flex-grow overflow-hidden relative h-full flex items-center w-full z-10" dir="ltr">
-        <div class="animate-infinite-ticker gap-4 sm:gap-6 pl-2 sm:pl-4 text-[9px] sm:text-xs font-semibold flex items-center w-max" dir="rtl">
+        <div class="flex animate-infinite-ticker shrink-0 w-max" dir="rtl">
             
             <!-- Group 1 -->
-            <div class="flex items-center gap-4 sm:gap-6 whitespace-nowrap">
+            <div class="flex items-center gap-4 sm:gap-6 px-2 sm:px-3 shrink-0 whitespace-nowrap">
                 {% for article in articles|slice:":5" %}
-                    <a href="{% url 'articles:detail' article.slug %}" class="flex items-center gap-1 sm:gap-1.5 text-gray-600 hover:text-[#cba358] transition duration-300">
+                    <a href="{% url 'articles:detail' article.slug %}" class="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-xs font-semibold text-gray-600 hover:text-[#cba358] transition duration-300">
                         <span class="w-1 h-1 rounded-full bg-[#cba358] inline-block"></span>
                         {{ article.title }}
                         {% if article.is_new %}<span class="bg-red-500 text-white text-[7px] sm:text-[8px] px-1 py-0.5 rounded-sm animate-pulse ml-1">جديد</span>{% endif %}
@@ -91,10 +91,10 @@
                 {% endfor %}
             </div>
 
-            <!-- Group 2 (نسخة طبق الأصل عشان اللحام يكون مخفي) -->
-            <div class="flex items-center gap-4 sm:gap-6 whitespace-nowrap" aria-hidden="true">
+            <!-- Group 2 -->
+            <div class="flex items-center gap-4 sm:gap-6 px-2 sm:px-3 shrink-0 whitespace-nowrap" aria-hidden="true">
                 {% for article in articles|slice:":5" %}
-                    <a href="{% url 'articles:detail' article.slug %}" class="flex items-center gap-1 sm:gap-1.5 text-gray-600 hover:text-[#cba358] transition duration-300" tabindex="-1">
+                    <a href="{% url 'articles:detail' article.slug %}" class="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-xs font-semibold text-gray-600 hover:text-[#cba358] transition duration-300">
                         <span class="w-1 h-1 rounded-full bg-[#cba358] inline-block"></span>
                         {{ article.title }}
                         {% if article.is_new %}<span class="bg-red-500 text-white text-[7px] sm:text-[8px] px-1 py-0.5 rounded-sm animate-pulse ml-1">جديد</span>{% endif %}
@@ -105,7 +105,6 @@
         </div>
     </div>
 </div>
-
 <!-- Pagination -->
 {% if is_paginated %}
     <div class="mt-8 flex justify-center items-center gap-2">

@@ -3,6 +3,15 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, div, button {
     font-family: 'Tajawal', sans-serif !important;
 }
 
+@keyframes pageFadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+body {
+    animation: pageFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* Animations */
 @keyframes seamlessTicker {
     0% { transform: translateX(-50%); }
@@ -16,7 +25,7 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, div, button {
 .animate-infinite-ticker {
     display: flex;
     width: max-content;
-    animation: infinite-scroll-rtl 10s linear infinite; 
+    animation: infinite-scroll-rtl 5s linear infinite; 
     will-change: transform; 
 }
 
@@ -73,12 +82,16 @@ body, h1, h2, h3, h4, h5, h6, p, a, span, div, button {
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-.force-wrap-content, .force-wrap-content * {
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    word-break: break-all !important; 
-    white-space: pre-wrap !important;
+
+.force-wrap-content {
+    overflow-wrap: anywhere !important; 
     max-width: 100% !important; 
+    white-space: pre-wrap !important;
+}
+
+.force-wrap-content * {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
 }
 
 /* Article Typography (Premium Look) */

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 import datetime
+import re
 
 class Article(models.Model):
   title= models.CharField(
@@ -74,6 +75,12 @@ class Article(models.Model):
       used in templates and to enable the "View on site" button in the admin panel.
     """
     return reverse('articles:detail', kwargs={'slug': self.slug})
+  
+  def save(self, *args, **kwargs):
+    if self.content:
+      self.content = self.content.strip()
+
+    super().save(*args, **kwargs)
 
 class Comment(models.Model):
   username= models.CharField(

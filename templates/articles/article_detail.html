@@ -1,21 +1,51 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}{{ article.title }} - راديو نبرة{% endblock %}
 
 {% block content %}
 <div class="max-w-4xl mx-auto mt-10 px-4 sm:px-0">
 
-    <!-- Back Button -->
-    <div class="mb-6 flex justify-start">
-        <a href="{% url 'articles:list' %}" class="inline-flex items-center gap-2 text-sm font-bold text-gray-600 hover:text-[#cba358] transition-all duration-300 bg-white px-4 py-2 rounded-xl border border-gray-100 shadow-sm hover:shadow-md">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            العودة لكل المقالات
-        </a>
+    <!-- شريط التنقل بين المقالات (السابق - الرئيسية - التالي) -->
+    <div class="mb-10 flex items-center justify-between gap-2 sm:gap-4 w-full">
+        
+        <!-- المقال السابق (يمين) -->
+        <div class="flex-1 flex justify-start">
+            {% if previous_article %}
+                <a href="{% url 'articles:detail' previous_article.slug %}" class="inline-flex items-center gap-1 sm:gap-2 text-[11px] sm:text-sm font-bold text-gray-600 hover:text-[#cba358] transition-all duration-300 bg-white px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md" title="{{ previous_article.title }}">
+                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    <span class="hidden sm:inline">المقال السابق</span>
+                    <span class="sm:hidden">السابق</span>
+                </a>
+            {% endif %}
+        </div>
+
+        <!-- العودة لكل المقالات (نص - ذهبي فخم) -->
+        <div class="flex-1 flex justify-center shrink-0">
+            <a href="{% url 'articles:list' %}" class="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm font-bold text-white bg-gradient-to-r from-[#cba358] to-[#d4af37] hover:from-[#b8914b] hover:to-[#cba358] transition-all duration-300 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl shadow-md hover:shadow-lg">
+                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                <span class="hidden sm:inline">كل المقالات</span>
+                <span class="sm:hidden">المقالات</span>
+            </a>
+        </div>
+
+        <!-- المقال التالي (يسار) -->
+        <div class="flex-1 flex justify-end">
+            {% if next_article %}
+                <a href="{% url 'articles:detail' next_article.slug %}" class="inline-flex items-center gap-1 sm:gap-2 text-[11px] sm:text-sm font-bold text-gray-600 hover:text-[#cba358] transition-all duration-300 bg-white px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md flex-row-reverse" title="{{ next_article.title }}">
+                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    <span class="hidden sm:inline">المقال التالي</span>
+                    <span class="sm:hidden">التالي</span>
+                </a>
+            {% endif %}
+        </div>
+
     </div>
 
     <!-- Article Container -->
     <article class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden mb-16">
         <div class="px-6 sm:px-10 lg:px-16 pt-10 lg:pt-14 pb-8 border-b border-gray-50">
+            
             <div class="mb-6 flex justify-center">
                 {% if article.is_new %}
                     <span class="bg-red-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-sm animate-pulse">جديد ⚡</span>
@@ -24,15 +54,17 @@
                 {% endif %}
             </div>
             
-            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-snug sm:leading-tight mb-6 text-center">{{ article.title }}</h1>
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-snug sm:leading-tight mb-6 text-center">
+                {{ article.title }}
+            </h1>
             
             <div class="flex flex-wrap justify-center items-center gap-4 text-sm text-gray-500 font-medium">
                 <div class="flex items-center gap-2">
-                  <div
-                    class="w-8 h-8 rounded-full bg-[#cba358] text-white flex items-center justify-center font-bold text-sm shadow-xs">
-                    {{ article.author.username|first|upper }}
-                  </div>
-                  <span class="font-bold text-gray-800">{{ article.author.username }}</span>
+                    <!-- Avatar Image (Webp) -->
+                    <div class="w-8 h-8 rounded-full overflow-hidden shadow-xs border border-[#cba358]/30 shrink-0 bg-gray-50">
+                        <img src="{% static 'images/article_default_profile_avatar.webp' %}" alt="{{ article.author.username }}" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-bold text-gray-800">{{ article.author.username }}</span>
                 </div>
                 <span>|</span>
                 <span class="flex items-center gap-1.5">
@@ -44,19 +76,19 @@
 
         <div class="px-6 sm:px-10 lg:px-16 py-8 sm:py-12">
             {% if article.image %}
-            <div class="mb-12 rounded-2xl overflow-hidden shadow-sm border border-gray-100 group relative">
-                <img src="{{ article.image.url }}" alt="{{ article.title }}" class="w-full h-auto max-h-[500px] object-cover transform group-hover:scale-105 transition-transform duration-700">
-            </div>
+                <div class="mb-12 rounded-2xl overflow-hidden shadow-sm border border-gray-100 group relative">
+                    <img src="{{ article.image.url }}" alt="{{ article.title }}" class="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover object-center transform group-hover:scale-105 transition-transform duration-700">
+                </div>
             {% endif %}
 
-            <div class="force-wrap-content article-body w-full overflow-hidden">
-              {{ article.content|safe }}
+            <div class="force-wrap-content article-body w-full overflow-hidden text-gray-800 leading-loose">
+              {{ article.content|linebreaksbr|safe }}
             </div>
         </div>
     </article>
 
     <!-- Comments Section -->
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10 mb-16">
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10 mb-16" id="comments-section">
         <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
             <span class="w-1.5 h-6 sm:w-2 sm:h-8 bg-[#cba358] rounded-full inline-block"></span>
             التعليقات ({{ comments|length|default:"0" }})
@@ -91,17 +123,19 @@
         <div class="space-y-4 w-full overflow-hidden">
             {% for comment in comments %}
                 <div class="bg-gray-50/60 p-4 sm:p-5 rounded-2xl border border-gray-100 flex gap-3 sm:gap-4 items-start w-full overflow-hidden max-w-full">
+                    
                     <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#cba358] text-white font-bold text-sm sm:text-base flex items-center justify-center shrink-0 shadow-xs">
                         {{ comment.username|first|upper }}
                     </div>
+                    
                     <div class="flex-grow min-w-0 overflow-hidden w-full"> 
                         <div class="flex items-center justify-between mb-2">
                             <h5 class="font-bold text-gray-900 text-sm truncate">{{ comment.username }}</h5>
                             <span class="text-[10px] text-gray-400 font-medium whitespace-nowrap ml-2">{{ comment.comment_date|date:"d M Y - H:i" }}</span>
                         </div>
-                        <p class="text-gray-700 text-xs sm:text-sm leading-relaxed whitespace-pre-line" style="word-break: break-all !important; overflow-wrap: break-word !important; white-space: pre-wrap !important;">
-                            {{ comment.comment }}
-                        </p>
+                          <p class="text-gray-700 text-xs sm:text-sm leading-relaxed" style="overflow-wrap: anywhere !important;">
+                            {{ comment.comment|linebreaksbr }}
+                          </p>
                     </div>
                 </div>
             {% empty %}
@@ -125,11 +159,9 @@
                 {% for rel_article in related_articles %}
                     <a href="{% url 'articles:detail' rel_article.slug %}" class="w-32 h-44 sm:w-56 sm:h-56 shrink-0 bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group block relative">
                         {% if rel_article.image %}
-                            <img src="{{ rel_article.image.url }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <img src="{{ rel_article.image.url }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
                         {% else %}
-                            <div class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-[#cba358]">
-                                <svg class="w-8 h-8 sm:w-12 sm:h-12 opacity-30" fill="currentColor" viewBox="0 0 20 20"><path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"></path></svg>
-                            </div>
+                            <img src="{% static 'images/article_default_profile_avatar.webp' %}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
                         {% endif %}
                         
                         <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-2 sm:p-4">

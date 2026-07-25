@@ -1,3 +1,5 @@
+{% load static %}
+
 <!-- Top mini bar -->
 <div class="bg-gray-50 border-b border-gray-100 text-[10px] sm:text-[11px] py-1.5">
     <div class="container mx-auto px-4 flex justify-between items-center text-gray-500">
@@ -21,12 +23,26 @@
             
             <!-- Left Side -->
             <div class="flex items-center gap-3">
+                <!-- Hamburger Button for Mobile -->
                 <button id="menu-toggle" class="lg:hidden text-gray-600 hover:text-[#cba358] focus:outline-none p-1" type="button" title="Menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
+
+                <!-- Logo Section -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{% url 'articles:list' %}" class="text-lg sm:text-2xl font-black text-gray-800 tracking-tighter hover:text-[#cba358] transition flex items-center gap-1">
-                        <span class="text-[#cba358]">راديو</span> نبرة
+                    <!-- اللينك بيضم الصورة والنص مع بعض -->
+                    <a href="{% url 'articles:list' %}" class="group flex items-center gap-2 sm:gap-3 transition">
+                        
+                        <!-- اللوجو (هيظهر على اليمين) -->
+                        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden shadow-sm border border-gray-100 group-hover:shadow-md group-hover:scale-105 transition-all duration-300">
+                            <img src="{% static 'images/main_logo.webp' %}" alt="لوجو راديو نبرة" class="w-full h-full object-cover">
+                        </div>
+                        
+                        <!-- النص (هيظهر على الشمال) -->
+                        <div class="text-lg sm:text-2xl font-black text-gray-800 tracking-tighter group-hover:text-[#cba358] transition duration-300 flex items-center gap-1">
+                            <span class="text-[#cba358]">راديو</span> نبرة
+                        </div>
+
                     </a>
                 </div>
             </div>

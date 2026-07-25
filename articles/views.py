@@ -39,10 +39,20 @@ class ArticleDetailView(DetailView):
   
   # CommentsSide(GET-CommentRead-)
   def get_context_data(self, **kwargs):
-    context= super().get_context_data(**kwargs)
-    context['form']= CommentForm()
-    context['comments']= self.object.comment_set.all()
+    context = super().get_context_data(**kwargs)
+    context['form'] = CommentForm()
+    context['comments'] = self.object.comment_set.all()
     context['related_articles'] = Article.objects.exclude(id=self.object.id).order_by('-created_at')[:6]
+    
+    # pagination pages control
+    try:
+        context['next_article']= self.object.get_next_by_created_at(is_published=True)
+    except Article.DoesNotExist:
+        context['next_article']= None
+    try:
+        context['previous_article']= self.object.get_previous_by_created_at(is_published=True)
+    except Article.DoesNotExist:
+        context['previous_article']= None
     return context
   
   # CommentsSide(POST-AddComment-)
@@ -62,6 +72,11 @@ class ArticleDetailView(DetailView):
     if form.is_valid():
       comment = form.save(commit=False)
       comment.article = self.object
+      # strip spaces in comments
+      if comment.comment:
+        comment.comment = comment.comment.strip()
+      if comment.username:
+        comment.username = comment.username.strip()
       comment.save() 
       return redirect(reverse('articles:detail', kwargs={'slug': self.object.slug}) + '#comments-section')
     
