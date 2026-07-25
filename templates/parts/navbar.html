@@ -57,15 +57,15 @@
             
             <!-- Desktop Links (Dynamic Active State) -->
             <div class="hidden lg:flex space-x-6 space-x-reverse items-center text-xs font-semibold">
-                <a href="{% url 'home:index' %}" class="{% if request.resolver_match.app_name == 'home' %}text-[#cba358] font-bold border-b-2 border-[#cba358] pb-0.5{% else %}text-gray-600 hover:text-[#cba358] transition{% endif %}">الرئيسية</a>
+                <a href="{% url 'home:index' %}" class="inline-block transition-all duration-300 ease-in-out hover:text-[#cba358] hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'home' %}text-[#cba358] font-bold border-b-2 border-[#cba358] pb-0.5{% else %}text-gray-600{% endif %}">الرئيسية</a>
                 
-                <a href="#" class="text-gray-600 hover:text-[#cba358] transition">الأخبار</a>
+                <a href="#" class="inline-block transition-all duration-300 ease-in-out hover:text-[#cba358] hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] text-gray-600">الأخبار</a>
                 
-                <a href="{% url 'podcasts:list' %}" class="{% if request.resolver_match.app_name == 'podcasts' %}text-[#cba358] font-bold border-b-2 border-[#cba358] pb-0.5{% else %}text-gray-600 hover:text-[#cba358] transition{% endif %}">البودكاست</a>
+                <a href="{% url 'podcasts:list' %}" class="inline-block transition-all duration-300 ease-in-out hover:text-[#cba358] hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'podcasts' %}text-[#cba358] font-bold border-b-2 border-[#cba358] pb-0.5{% else %}text-gray-600{% endif %}">البودكاست</a>
                 
-                <a href="{% url 'articles:list' %}" class="{% if request.resolver_match.app_name == 'articles' %}text-[#cba358] font-bold border-b-2 border-[#cba358] pb-0.5{% else %}text-gray-600 hover:text-[#cba358] transition{% endif %}">مقالات</a>
+                <a href="{% url 'articles:list' %}" class="inline-block transition-all duration-300 ease-in-out hover:text-[#cba358] hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'articles' %}text-[#cba358] font-bold border-b-2 border-[#cba358] pb-0.5{% else %}text-gray-600{% endif %}">مقالات</a>
                 
-                <a href="mailto:radionabra@gmail.com" class="text-gray-600 hover:text-[#cba358] transition">تواصل معنا</a>
+                <a href="mailto:radionabra@gmail.com" class="inline-block transition-all duration-300 ease-in-out hover:text-[#cba358] hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] text-gray-600">تواصل معنا</a>
             </div>
             
             <!-- Search -->
@@ -84,15 +84,15 @@
     </div>
 
     <!-- Mobile Menu (Dynamic Active State) -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 px-4 pt-3 pb-4 space-y-2 text-xs font-semibold shadow-lg">
-        <a href="{% url 'home:index' %}" class="block py-2 border-b border-gray-50 {% if request.resolver_match.app_name == 'home' %}text-[#cba358] font-bold{% else %}text-gray-600 hover:text-[#cba358] transition{% endif %}">الرئيسية</a>
+<div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 px-4 pt-3 pb-4 space-y-2 text-xs font-semibold shadow-lg">
+        <a href="{% url 'home:index' %}" class="block py-2 border-b border-gray-50 transition-all duration-300 ease-in-out origin-right hover:text-[#cba358] hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'home' %}text-[#cba358] font-bold{% else %}text-gray-600{% endif %}">الرئيسية</a>
         
-        <a href="#" class="block py-2 text-gray-600 hover:text-[#cba358] transition border-b border-gray-50">الأخبار</a>
+        <a href="#" class="block py-2 border-b border-gray-50 transition-all duration-300 ease-in-out origin-right hover:text-[#cba358] hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] text-gray-600">الأخبار</a>
         
-        <a href="{% url 'podcasts:list' %}" class="block py-2 border-b border-gray-50 {% if request.resolver_match.app_name == 'podcasts' %}text-[#cba358] font-bold{% else %}text-gray-600 hover:text-[#cba358] transition{% endif %}">البودكاست</a>
+        <a href="{% url 'podcasts:list' %}" class="block py-2 border-b border-gray-50 transition-all duration-300 ease-in-out origin-right hover:text-[#cba358] hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'podcasts' %}text-[#cba358] font-bold{% else %}text-gray-600{% endif %}">البودكاست</a>
         
-        <a href="{% url 'articles:list' %}" class="block py-2 border-b border-gray-50 {% if request.resolver_match.app_name == 'articles' %}text-[#cba358] font-bold{% else %}text-gray-600 hover:text-[#cba358] transition{% endif %}">مقالات</a>
+        <a href="{% url 'articles:list' %}" class="block py-2 border-b border-gray-50 transition-all duration-300 ease-in-out origin-right hover:text-[#cba358] hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'articles' %}text-[#cba358] font-bold{% else %}text-gray-600{% endif %}">مقالات</a>
         
-        <a href="mailto:radionabra@gmail.com" class="block py-2 text-gray-600 hover:text-[#cba358] transition">تواصل معنا</a>
+        <a href="mailto:radionabra@gmail.com" class="block py-2 transition-all duration-300 ease-in-out origin-right hover:text-[#cba358] hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] text-gray-600">تواصل معنا</a>
     </div>
 </nav>

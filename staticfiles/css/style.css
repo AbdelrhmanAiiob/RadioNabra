@@ -1,18 +1,18 @@
 /* ==========================================
-   CSS Variables (Theme System)
+  CSS Variables (Theme System)
 ========================================== */
 :root {
-    /* وضع النهار (Light Mode - الافتراضي) */
-    --bg-primary: #f3f4f6; /* bg-gray-100 */
+    /* (Light Mode - Default) */
+    --bg-primary: #f3f4f6; 
     --bg-secondary: #ffffff;
-    --bg-tertiary: #f9fafb; /* bg-gray-50 */
+    --bg-tertiary: #f9fafb; 
     
-    --text-primary: #111827; /* text-gray-900 */
-    --text-secondary: #4b5563; /* text-gray-600 */
-    --text-muted: #9ca3af; /* text-gray-400 */
+    --text-primary: #111827; 
+    --text-secondary: #4b5563; 
+    --text-muted: #9ca3af; 
     
-    --border-color: #f3f4f6; /* border-gray-100 */
-    --border-strong: #e5e7eb; /* border-gray-200 */
+    --border-color: #f3f4f6; 
+    --border-strong: #e5e7eb; 
     
     --gold-primary: #cba358;
     --gold-hover: #b8914b;
@@ -22,20 +22,20 @@
     --shadow-soft: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
-/* وضع الليل (Dark Mode) */
+/* (Dark Mode) */
 .dark-mode {
-    --bg-primary: #111827; /* أسود هادي */
-    --bg-secondary: #1f2937; /* رصاصي غامق للكروت */
-    --bg-tertiary: #374151; /* أغمق شوية للـ Hover */
+    --bg-primary: #111827; 
+    --bg-secondary: #1f2937; 
+    --bg-tertiary: #374151; 
     
-    --text-primary: #f9fafb; /* أبيض ناصع */
-    --text-secondary: #d1d5db; /* رصاصي فاتح للنصوص */
+    --text-primary: #f9fafb; 
+    --text-secondary: #d1d5db; 
     --text-muted: #9ca3af;
     
-    --border-color: #374151; /* حدود غامقة */
+    --border-color: #374151; 
     --border-strong: #4b5563;
     
-    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.5); /* ظل أقوى في الظلام */
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
 }
 
 body {
@@ -76,9 +76,9 @@ body {
     box-shadow: var(--shadow-soft) !important;
 }
 
-/* استثناءات: حاجات مش عايزينها تتأثر بالـ Dark Mode (زي الهيرو سكشن الفخم) */
+
 .bg-gradient-to-br, .bg-gray-900, .bg-gradient-to-r {
-    background-color: initial !important; /* نرجعها لطبيعة Tailwind */
+    background-color: initial !important; 
 }
 
 /* Core Typography */
@@ -125,6 +125,29 @@ body {
 @keyframes softZoom {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
+}
+
+@keyframes pop-gold {
+    0% {
+        transform: scale(1);
+        color: inherit;
+    }
+    60% {
+        transform: scale(1.15);
+        color: #cba358;
+        text-shadow: 0 0 15px rgba(203, 163, 88, 0.8);
+    }
+    100% {
+        transform: scale(1.05);
+        color: #cba358;
+        text-shadow: 0 0 5px rgba(203, 163, 88, 0.4);
+    }
+}
+
+.animate-pop-gold {
+    display: inline-block; /* مهم جداً عشان التكبير يشتغل */
+    animation: pop-gold 0.8s ease-out forwards;
+    animation-delay: 0.3s;
 }
 
 /* Animation Classes */

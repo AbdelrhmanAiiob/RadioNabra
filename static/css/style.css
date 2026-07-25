@@ -127,6 +127,49 @@ body {
     50% { transform: scale(1.05); }
 }
 
+@keyframes pop-gold {
+    0% {
+        transform: scale(1);
+        color: inherit;
+    }
+    60% {
+        transform: scale(1.15);
+        color: #cba358;
+        text-shadow: 0 0 15px rgba(203, 163, 88, 0.8);
+    }
+    100% {
+        transform: scale(1.05);
+        color: #cba358;
+        text-shadow: 0 0 5px rgba(203, 163, 88, 0.4);
+    }
+}
+
+/* أنيميشن نبض وتنفس للخط */
+@keyframes breathe-line {
+    0%, 100% {
+        transform: scaleX(0.85); /* بيكون أقصر شوية */
+        opacity: 0.6; /* شفاف شوية */
+        box-shadow: 0 0 2px rgba(203, 163, 88, 0.1);
+    }
+    50% {
+        transform: scaleX(1.05); /* بيمط لبرة شوية */
+        opacity: 1; /* لونه بيبقى واضح تماماً */
+        box-shadow: 0 0 15px rgba(203, 163, 88, 0.9); /* بيعمل توهج قوي */
+    }
+}
+
+.animate-breathe-line {
+    /* الحركة دي هتفضل شغالة لما لا نهاية (infinite) وكل لفة بتاخد 2.5 ثانية */
+    animation: breathe-line 2.5s infinite ease-in-out;
+    transform-origin: center; /* السطر ده سحري عشان يخلي الخط يكبر ويصغر من النص بالظبط وميحدفش يمين تاني */
+}
+
+.animate-pop-gold {
+    display: inline-block; /* مهم جداً عشان التكبير يشتغل */
+    animation: pop-gold 0.8s ease-out forwards;
+    animation-delay: 0.3s;
+}
+
 /* Animation Classes */
 .animate-ticker {
     display: flex;

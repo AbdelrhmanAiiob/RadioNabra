@@ -11,9 +11,11 @@
         {% if request.GET.q %}
             نتائج البحث عن: "{{ request.GET.q }}"
         {% else %}
-            آخر الأخبار والمقالات
+            <!-- هنا فصلنا الـ "و" عن "المقالات" بمسافة إجبارية -->
+            آخر الأخبار و&nbsp;<span class="animate-pop-gold">المقالات</span>
         {% endif %}
-        <span class="absolute bottom-0 w-full left-0 h-1 bg-[#cba358] rounded-full animate-draw-line"></span>
+        
+        <span class="absolute bottom-0 w-full left-0 h-1 bg-[#cba358] rounded-full animate-breathe-line"></span>
     </h1>
     {% if request.GET.q %}
         <div class="mt-2">

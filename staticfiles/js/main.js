@@ -1,11 +1,10 @@
 /* ==========================================
-   0. Dark Mode / Theme Toggle Logic
+  0. Dark Mode / Theme Toggle Logic
 ========================================== */
 const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
 const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 const themeToggleBtn = document.getElementById('theme-toggle');
 
-// 1. تحديد الوضع الحالي (من التخزين المحلي أو من إعدادات جهاز المستخدم)
 if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.classList.add('dark-mode');
     if (themeToggleLightIcon) themeToggleLightIcon.classList.remove('hidden');
@@ -16,11 +15,9 @@ if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localS
 
 if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', function() {
-        // تبديل الأيقونات مع أنيميشن اللف
         themeToggleDarkIcon.classList.toggle('hidden');
         themeToggleLightIcon.classList.toggle('hidden');
 
-        // لو كان مسجل كـ Light نخليه Dark
         if (localStorage.getItem('color-theme')) {
             if (localStorage.getItem('color-theme') === 'light') {
                 document.documentElement.classList.add('dark-mode');
@@ -29,7 +26,6 @@ if (themeToggleBtn) {
                 document.documentElement.classList.remove('dark-mode');
                 localStorage.setItem('color-theme', 'light');
             }
-        // لو مفيش حاجة مسجلة نعتمد على وضع الجهاز
         } else {
             if (document.documentElement.classList.contains('dark-mode')) {
                 document.documentElement.classList.remove('dark-mode');
@@ -41,6 +37,17 @@ if (themeToggleBtn) {
         }
     });
 }
+
+// 404
+window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 700);
+    }
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -109,7 +116,6 @@ const searchToggle = document.getElementById('search-toggle');
 /* ==========================================
       2. Auto Sliders Logic (Handles Multiple Sliders)
     ========================================== */
-    // هنجيب كل السلايدرات اللي في الصفحة
     const sliders = document.querySelectorAll('.auto-slider, #related-slider');
     
     sliders.forEach(slider => {

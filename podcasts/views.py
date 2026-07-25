@@ -22,12 +22,12 @@ class PodcastListView(ListView):
   paginate_by = 9 
 
   def get_queryset(self):
-    qs = Podcast.objects.select_related('host').filter(is_published=True).order_by('-created_at')
-    query = self.request.GET.get('q')
+    qs= Podcast.objects.select_related('host').filter(is_published=True).order_by('-created_at')
+    query= self.request.GET.get('q')
     
     # if userSearch
     if query:
-      qs = qs.filter(title__icontains=query) 
+      qs= qs.filter(title__icontains=query) 
     return qs
 
 
