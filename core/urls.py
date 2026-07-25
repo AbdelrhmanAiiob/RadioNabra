@@ -5,9 +5,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home.urls')),
-    path('articles/', include('articles.urls')),
-    path('podcasts/', include('podcasts.urls')),
+    path('', include('home.urls'), name='home'),
+    path('articles/', include('articles.urls'), name='articles'),
+    path('podcasts/', include('podcasts.urls'), name='podcasts'),
 ]
 
 # debug= Ture(local)

@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}راديو نبرة{% endblock %}
+
+{% block content %}
+
+    <!-- 1. Hero Section (Premium Dark) -->
+    <div class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-3xl overflow-hidden shadow-2xl mb-16 border border-gray-700 w-full animate-pop-in">
+        
+        <!-- إضاءات ذهبية في الخلفية (Ambient Lights) -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-[#cba358] rounded-full mix-blend-screen filter blur-[100px] opacity-20 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-[#d4af37] rounded-full mix-blend-screen filter blur-[120px] opacity-10 pointer-events-none"></div>
+        
+        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between p-8 sm:p-12 lg:p-16 gap-8">
+            
+            <!-- محتوى النص -->
+            <div class="flex-1 text-center md:text-right">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/80 text-xs font-semibold mb-6 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                    صوت الصحافة ينبض هنا
+                </div>
+                
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-6">
+                  <span class="block mb-4">
+                    استمع إلى <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#cba358] to-[#d4af37]">راديو نبرة</span>
+                  </span>
+                  <span class="block leading-snug">حيث تبدأ الحقيقة</span>
+                </h1>
+                
+                <p class="text-gray-400 text-sm sm:text-base leading-relaxed mb-8 max-w-lg mx-auto md:mx-0 font-medium">
+                    منصتك الأولى للصحافة المسموعة والمقالات الحصرية. نغوص في أعماق الأحداث لنأتيك بالقصة كاملة، من قلوبنا لقلوبكم.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+                    <a href="{% url 'podcasts:list' %}" class="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-[#cba358] to-[#d4af37] hover:from-[#b8914b] hover:to-[#cba358] text-white font-bold rounded-xl shadow-[0_0_20px_rgba(203,163,88,0.4)] hover:shadow-[0_0_30px_rgba(203,163,88,0.6)] transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                        استمع للبودكاست
+                    </a>
+                    <a href="{% url 'articles:list' %}" class="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl border border-white/10 backdrop-blur-md transition-all duration-300 flex items-center justify-center gap-2">
+                        اقرأ المقالات
+                    </a>
+                </div>
+            </div>
+            
+            <!-- صورة أو أيقونة 3D -->
+            <div class="flex-1 hidden md:flex justify-center items-center relative animate-soft-zoom">
+                <!-- يمكنك استبدال هذه بـ Image 3D لو عندك مستقبلاً -->
+                <div class="w-48 h-48 lg:w-64 lg:h-64 rounded-full bg-gradient-to-br from-[#cba358] to-[#9a7b42] p-1 shadow-2xl relative">
+                    <div class="w-full h-full bg-gray-900 rounded-full flex items-center justify-center border-4 border-gray-800">
+                        <svg class="w-24 h-24 lg:w-32 lg:h-32 text-[#cba358]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- 2. أحدث حلقات البودكاست (Auto Slider) -->
+    <div class="mb-16">
+        <div class="flex justify-between items-end mb-6 border-b border-gray-200 pb-3">
+            <h3 class="text-xl sm:text-2xl font-black text-gray-900 flex items-center gap-2">
+                <span class="w-1.5 h-6 bg-[#cba358] rounded-full inline-block"></span>
+                أحدث حلقات البودكاست
+            </h3>
+            <a href="{% url 'podcasts:list' %}" class="text-xs sm:text-sm font-bold text-[#cba358] hover:text-[#b8914b] transition flex items-center gap-1">
+                عرض الكل <span dir="ltr">&larr;</span>
+            </a>
+        </div>
+
+        <!-- السلايدر -->
+        <div class="flex overflow-x-auto hide-scrollbar gap-4 sm:gap-6 pb-4 w-full cursor-grab active:cursor-grabbing auto-slider" dir="rtl">
+            {% for i in "123" %} <!-- تكرار الكروت عشان السكرول ميعلقش لو العدد قليل -->
+                {% for podcast in latest_podcasts %}
+                    <a href="{% url 'podcasts:detail' podcast.slug %}" class="w-64 sm:w-72 shrink-0 group block relative rounded-2xl overflow-hidden bg-gray-900 shadow-md hover:shadow-xl transition-all duration-500">
+                        <div class="aspect-w-1 aspect-h-1 w-full relative">
+                            {% if podcast.cover_image %}
+                                <img src="{{ podcast.cover_image.url }}" class="w-full h-48 sm:h-56 object-cover object-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                            {% else %}
+                                <img src="{% static 'images/article_default_profile_avatar.webp' %}" class="w-full h-48 sm:h-56 object-cover object-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                            {% endif %}
+                            
+                            <!-- Play Button Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors duration-500">
+                                <div class="w-12 h-12 bg-[#cba358]/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-[#cba358] transition-all duration-300">
+                                    <svg class="w-5 h-5 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-gray-900 via-gray-900/90 to-transparent">
+                            <h4 class="text-white font-bold text-sm sm:text-base leading-snug line-clamp-2 group-hover:text-[#cba358] transition-colors duration-300">{{ podcast.title }}</h4>
+                        </div>
+                    </a>
+                {% endfor %}
+            {% endfor %}
+            {% if not latest_podcasts %}
+                <div class="w-full text-center py-10 text-gray-500 bg-white border border-gray-100 rounded-2xl shadow-sm">
+                    لا توجد حلقات بودكاست متاحة حالياً.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- 3. أحدث المقالات (Auto Slider) -->
+    <div class="mb-10">
+        <div class="flex justify-between items-end mb-6 border-b border-gray-200 pb-3">
+            <h3 class="text-xl sm:text-2xl font-black text-gray-900 flex items-center gap-2">
+                <span class="w-1.5 h-6 bg-[#cba358] rounded-full inline-block"></span>
+                قلم الصحافة
+            </h3>
+            <a href="{% url 'articles:list' %}" class="text-xs sm:text-sm font-bold text-[#cba358] hover:text-[#b8914b] transition flex items-center gap-1">
+                كل المقالات <span dir="ltr">&larr;</span>
+            </a>
+        </div>
+
+        <!-- السلايدر -->
+        <div class="flex overflow-x-auto hide-scrollbar gap-4 sm:gap-6 pb-4 w-full cursor-grab active:cursor-grabbing auto-slider" dir="rtl">
+            {% for i in "123" %} <!-- تكرار الكروت -->
+                {% for article in latest_articles %}
+                    <div class="w-72 sm:w-80 shrink-0 bg-white rounded-xl shadow-xs border border-gray-100 hover:shadow-md transition-all duration-300 overflow-hidden group flex flex-col relative">
+                        {% if article.is_new %}
+                            <span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-md z-10 shadow-xs animate-pulse">جديد ⚡</span>
+                        {% endif %}
+
+                        <a href="{% url 'articles:detail' article.slug %}" class="block overflow-hidden relative">
+                            {% if article.image %}
+                                <img src="{{ article.image.url }}" class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out">
+                            {% else %}
+                                <img src="{% static 'images/article_default_profile_avatar.webp' %}" class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out">
+                            {% endif %}
+                        </a>
+                        
+                        <div class="p-4 sm:p-5 flex flex-col flex-grow bg-white">
+                            <h2 class="text-base sm:text-lg font-bold text-gray-900 mb-2 line-clamp-2 leading-snug">
+                                <a href="{% url 'articles:detail' article.slug %}" class="hover:text-[#cba358] transition duration-200">{{ article.title }}</a>
+                            </h2>
+                            <p class="text-gray-500 text-xs sm:text-sm mb-4 flex-grow leading-relaxed line-clamp-3">
+                                {{ article.content|striptags|truncatewords:15 }}
+                            </p>
+                            <div class="flex justify-between items-center text-xs font-semibold border-t border-gray-50 pt-3 mt-auto">
+                                <span class="text-[#cba358] flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                    {{ article.author.username }}
+                                </span>
+                                <span class="text-gray-400 text-[11px]">{{ article.created_at|date:"d M Y" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% if not latest_articles %}
+                <div class="w-full text-center py-10 text-gray-500 bg-white border border-gray-100 rounded-2xl shadow-sm">
+                    لا توجد مقالات متاحة حالياً.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

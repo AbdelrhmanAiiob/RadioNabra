@@ -1,7 +1,7 @@
 {% load static %}
 
 <!-- Top mini bar -->
-<div class="bg-gray-50 border-b border-gray-100 text-[10px] sm:text-[11px] py-1.5">
+<div class="bg-gray-50 border-b border-gray-100 text-[10px] sm:text-[11px] py-1.5 transition-colors duration-400">
     <div class="container mx-auto px-4 flex justify-between items-center text-gray-500">
         <!-- Social Icons -->
         <div class="flex items-center gap-3 text-[#cba358]">
@@ -12,7 +12,19 @@
                 <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
             </a>
         </div>
-        <div class="font-medium tracking-wide">صوت الصحافة للمقالات والبودكاست</div>
+        
+        <div class="flex items-center gap-4">
+            <div class="font-medium tracking-wide hidden sm:block">صوت الصحافة للمقالات والبودكاست</div>
+            
+            <!-- زرار الـ Dark Mode التفاعلي -->
+            <button id="theme-toggle" type="button" class="text-gray-500 hover:text-[#cba358] focus:outline-none focus:ring-2 focus:ring-[#cba358] rounded-full text-sm p-1.5 transition-all duration-500">
+                <!-- أيقونة الشمس (تظهر في وضع الليل) -->
+                <svg id="theme-toggle-light-icon" class="hidden w-4 h-4 transform transition-transform duration-500 hover:rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                
+                <!-- أيقونة القمر (تظهر في وضع النهار) -->
+                <svg id="theme-toggle-dark-icon" class="hidden w-4 h-4 transform transition-transform duration-500 hover:-rotate-12" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            </button>
+        </div>
     </div>
 </div>
 
@@ -30,35 +42,36 @@
 
                 <!-- Logo Section -->
                 <div class="flex-shrink-0 flex items-center">
-                    <!-- اللينك بيضم الصورة والنص مع بعض -->
-                    <a href="{% url 'articles:list' %}" class="group flex items-center gap-2 sm:gap-3 transition">
-                        
-                        <!-- اللوجو (هيظهر على اليمين) -->
+                    <a href="{% url 'home:index' %}" class="group flex items-center gap-2 sm:gap-3 transition">
+                        <!-- اللوجو -->
                         <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden shadow-sm border border-gray-100 group-hover:shadow-md group-hover:scale-105 transition-all duration-300">
                             <img src="{% static 'images/main_logo.webp' %}" alt="لوجو راديو نبرة" class="w-full h-full object-cover">
                         </div>
-                        
-                        <!-- النص (هيظهر على الشمال) -->
+                        <!-- النص -->
                         <div class="text-lg sm:text-2xl font-black text-gray-800 tracking-tighter group-hover:text-[#cba358] transition duration-300 flex items-center gap-1">
                             <span class="text-[#cba358]">راديو</span> نبرة
                         </div>
-
                     </a>
                 </div>
             </div>
             
-            <!-- Desktop Links -->
+            <!-- Desktop Links (Dynamic Active State) -->
             <div class="hidden lg:flex space-x-6 space-x-reverse items-center text-xs font-semibold">
-                <a href="{% url 'articles:list' %}" class="text-[#cba358] font-bold border-b-2 border-[#cba358] pb-0.5">الرئيسية</a>
+                <a href="{% url 'home:index' %}" class="{% if request.resolver_match.app_name == 'home' %}text-[#cba358] font-bold border-b-2 border-[#cba358] pb-0.5{% else %}text-gray-600 hover:text-[#cba358] transition{% endif %}">الرئيسية</a>
+                
                 <a href="#" class="text-gray-600 hover:text-[#cba358] transition">الأخبار</a>
-                <a href="#" class="text-gray-600 hover:text-[#cba358] transition">البودكاست</a>
-                <a href="#" class="text-gray-600 hover:text-[#cba358] transition">مقالات</a>
+                
+                <a href="{% url 'podcasts:list' %}" class="{% if request.resolver_match.app_name == 'podcasts' %}text-[#cba358] font-bold border-b-2 border-[#cba358] pb-0.5{% else %}text-gray-600 hover:text-[#cba358] transition{% endif %}">البودكاست</a>
+                
+                <a href="{% url 'articles:list' %}" class="{% if request.resolver_match.app_name == 'articles' %}text-[#cba358] font-bold border-b-2 border-[#cba358] pb-0.5{% else %}text-gray-600 hover:text-[#cba358] transition{% endif %}">مقالات</a>
+                
                 <a href="mailto:radionabra@gmail.com" class="text-gray-600 hover:text-[#cba358] transition">تواصل معنا</a>
             </div>
             
             <!-- Search -->
             <div class="flex items-center gap-2">
                 <div class="flex items-center gap-1.5 relative" id="search-wrapper">
+                    <!-- حالياً البحث بيودي على المقالات، ممكن نعدلها بعدين لو حبيت تعمل صفحة بحث عامة -->
                     <form action="{% url 'articles:list' %}" method="GET" id="search-form" class="overflow-hidden transition-all duration-300 ease-out w-0 opacity-0 flex items-center bg-gray-50 rounded-full border border-gray-200 py-0.5 px-2">
                         <input type="text" name="q" id="search-input" value="{{ request.GET.q|default:'' }}" class="bg-transparent text-gray-700 text-xs block w-24 sm:w-36 py-1 px-1 outline-none placeholder-gray-400" placeholder="ابحث...">
                     </form>
@@ -70,12 +83,16 @@
         </div>
     </div>
 
-    <!-- Mobile Menu -->
+    <!-- Mobile Menu (Dynamic Active State) -->
     <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 px-4 pt-3 pb-4 space-y-2 text-xs font-semibold shadow-lg">
-        <a href="{% url 'articles:list' %}" class="block py-2 text-[#cba358] font-bold border-b border-gray-50">الرئيسية</a>
+        <a href="{% url 'home:index' %}" class="block py-2 border-b border-gray-50 {% if request.resolver_match.app_name == 'home' %}text-[#cba358] font-bold{% else %}text-gray-600 hover:text-[#cba358] transition{% endif %}">الرئيسية</a>
+        
         <a href="#" class="block py-2 text-gray-600 hover:text-[#cba358] transition border-b border-gray-50">الأخبار</a>
-        <a href="#" class="block py-2 text-gray-600 hover:text-[#cba358] transition border-b border-gray-50">البودكاست</a>
-        <a href="#" class="block py-2 text-gray-600 hover:text-[#cba358] transition border-b border-gray-50">مقالات</a>
+        
+        <a href="{% url 'podcasts:list' %}" class="block py-2 border-b border-gray-50 {% if request.resolver_match.app_name == 'podcasts' %}text-[#cba358] font-bold{% else %}text-gray-600 hover:text-[#cba358] transition{% endif %}">البودكاست</a>
+        
+        <a href="{% url 'articles:list' %}" class="block py-2 border-b border-gray-50 {% if request.resolver_match.app_name == 'articles' %}text-[#cba358] font-bold{% else %}text-gray-600 hover:text-[#cba358] transition{% endif %}">مقالات</a>
+        
         <a href="mailto:radionabra@gmail.com" class="block py-2 text-gray-600 hover:text-[#cba358] transition">تواصل معنا</a>
     </div>
 </nav>

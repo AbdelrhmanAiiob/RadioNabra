@@ -1,3 +1,86 @@
+/* ==========================================
+   CSS Variables (Theme System)
+========================================== */
+:root {
+    /* وضع النهار (Light Mode - الافتراضي) */
+    --bg-primary: #f3f4f6; /* bg-gray-100 */
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f9fafb; /* bg-gray-50 */
+    
+    --text-primary: #111827; /* text-gray-900 */
+    --text-secondary: #4b5563; /* text-gray-600 */
+    --text-muted: #9ca3af; /* text-gray-400 */
+    
+    --border-color: #f3f4f6; /* border-gray-100 */
+    --border-strong: #e5e7eb; /* border-gray-200 */
+    
+    --gold-primary: #cba358;
+    --gold-hover: #b8914b;
+    --gold-gradient-start: #cba358;
+    --gold-gradient-end: #d4af37;
+    
+    --shadow-soft: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* وضع الليل (Dark Mode) */
+.dark-mode {
+    --bg-primary: #111827; /* أسود هادي */
+    --bg-secondary: #1f2937; /* رصاصي غامق للكروت */
+    --bg-tertiary: #374151; /* أغمق شوية للـ Hover */
+    
+    --text-primary: #f9fafb; /* أبيض ناصع */
+    --text-secondary: #d1d5db; /* رصاصي فاتح للنصوص */
+    --text-muted: #9ca3af;
+    
+    --border-color: #374151; /* حدود غامقة */
+    --border-strong: #4b5563;
+    
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.5); /* ظل أقوى في الظلام */
+}
+
+body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+}
+
+.bg-white, .bg-gray-50 {
+    background-color: var(--bg-secondary) !important;
+    transition: background-color 0.4s ease-in-out;
+}
+
+.bg-white {
+    background-color: var(--bg-secondary) !important;
+    transition: background-color 0.4s ease-in-out;
+}
+
+.bg-gray-50 {
+    background-color: var(--bg-tertiary) !important;
+    transition: background-color 0.4s ease-in-out;
+}
+
+.text-gray-900, .text-gray-800 {
+    color: var(--text-primary) !important;
+}
+
+.text-gray-600, .text-gray-500, .text-gray-700 {
+    color: var(--text-secondary) !important;
+}
+
+.border-gray-100, .border-gray-200, .border-gray-50, .border-b {
+    border-color: var(--border-color) !important;
+    transition: border-color 0.4s ease-in-out;
+}
+
+.shadow-xs, .shadow-sm, .shadow-md {
+    box-shadow: var(--shadow-soft) !important;
+}
+
+/* استثناءات: حاجات مش عايزينها تتأثر بالـ Dark Mode (زي الهيرو سكشن الفخم) */
+.bg-gradient-to-br, .bg-gray-900, .bg-gradient-to-r {
+    background-color: initial !important; /* نرجعها لطبيعة Tailwind */
+}
+
 /* Core Typography */
 body, h1, h2, h3, h4, h5, h6, p, a, span, div, button {
     font-family: 'Tajawal', sans-serif !important;
@@ -86,7 +169,6 @@ body {
 .force-wrap-content {
     overflow-wrap: anywhere !important; 
     max-width: 100% !important; 
-    white-space: pre-wrap !important;
 }
 
 .force-wrap-content * {
@@ -94,7 +176,6 @@ body {
     overflow-wrap: anywhere !important;
 }
 
-/* Article Typography (Premium Look) */
 .article-body {
     color: #374151; 
     line-height: 2.2; 

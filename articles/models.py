@@ -108,8 +108,8 @@ class Comment(models.Model):
   )
 
   class Meta:
-    verbose_name= "تعليق"
-    verbose_name_plural= "التعليقات"
+    verbose_name= "تعليق المقال"
+    verbose_name_plural= "تعليقات المقالات"
   
   def __str__(self):
     return f"Comment by {self.username} on {self.article.title}"
