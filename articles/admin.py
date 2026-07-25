@@ -1,9 +1,10 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin
 from .models import Article, Comment
 
 # main article
 @admin.register(Article)
-class ArticleAdmin(admin.ModelAdmin):
+class ArticleAdmin(ModelAdmin):
   list_display= ('title', 'author', 'is_published', 'created_at')
 
   # Automatically fills the 'slug' field based on what you type in the 'title' field.
@@ -41,7 +42,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
 # commentSide
 @admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
+class CommentAdmin(ModelAdmin):
   list_display = ('username', 'article', 'comment_date') # appear fields
   list_filter = ('comment_date', 'article')              # fields filter
   search_fields = ('username', 'comment')                # fields search

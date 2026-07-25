@@ -1,9 +1,10 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin
 from .models import Podcast, PodcastComment
 
 # main podcast
 @admin.register(Podcast)
-class PodcastAdmin(admin.ModelAdmin):
+class PodcastAdmin(ModelAdmin):
   list_display = ('title', 'host', 'is_published', 'created_at')
 
   # Automatically fills the 'slug' field based on what you type in the 'title' field.
@@ -26,7 +27,7 @@ class PodcastAdmin(admin.ModelAdmin):
 
 # commentSide
 @admin.register(PodcastComment)
-class PodcastCommentAdmin(admin.ModelAdmin):
+class PodcastCommentAdmin(ModelAdmin):
   list_display = ('username', 'podcast', 'comment_date') 
   list_filter = ('comment_date', 'podcast')              
   search_fields = ('username', 'comment')                
