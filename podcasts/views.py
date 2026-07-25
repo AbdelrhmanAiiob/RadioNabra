@@ -22,7 +22,7 @@ class PodcastListView(ListView):
   paginate_by = 9 
 
   def get_queryset(self):
-    qs = Podcast.objects.filter(is_published=True).order_by('-created_at')
+    qs = Podcast.objects.select_related('host').filter(is_published=True).order_by('-created_at')
     query = self.request.GET.get('q')
     
     # if userSearch
@@ -38,7 +38,7 @@ class PodcastDetailView(DetailView):
   context_object_name = 'podcast' 
 
   def get_queryset(self):
-    return Podcast.objects.filter(is_published=True)
+    return Podcast.objects.select_related('host').filter(is_published=True)
   
   # CommentsSide(GET-CommentRead-)
   def get_context_data(self, **kwargs):
@@ -46,8 +46,7 @@ class PodcastDetailView(DetailView):
     context['form'] = PodcastCommentForm()
     # Fetching comments specific to this podcast
     context['comments'] = self.object.comments.filter(active=True)
-    # Fetching related podcasts (excluding the current one)
-    context['related_podcasts'] = Podcast.objects.exclude(id=self.object.id).order_by('-created_at')[:6]
+    context['related_podcasts'] = Podcast.objects.select_related('host').exclude(id=self.object.id).order_by('-created_at')[:6]
     
     # pagination pages control for next and previous podcasts
     try:
@@ -59,38 +58,38 @@ class PodcastDetailView(DetailView):
     except Podcast.DoesNotExist:
       context['previous_podcast'] = None
     return context
+
+# CommentsSide(POST-AddComment-)
+def post(self, request, *args, **kwargs):
+  self.object = self.get_object() 
   
-  # CommentsSide(POST-AddComment-)
-  def post(self, request, *args, **kwargs):
-    self.object = self.get_object() 
+  # PRG Pattern: Using copy to manipulate POST data safely
+  data = request.POST.copy()
+  
+  # Handle 'unknown' username and strip whitespaces
+  if not data.get('username') or data.get('username').strip() == '':
+    data['username'] = 'غير معروف'
+  else:
+    data['username'] = data['username'].strip()
+  # Strip whitespaces from comment
+  if data.get('comment'):
+    data['comment'] = data.get('comment').strip()
+  form = PodcastCommentForm(data)
+  
+  if form.is_valid():
+    comment = form.save(commit=False)
+    comment.podcast = self.object
     
-    # PRG Pattern: Using copy to manipulate POST data safely
-    data = request.POST.copy()
-    
-    # Handle 'unknown' username and strip whitespaces
-    if not data.get('username') or data.get('username').strip() == '':
-      data['username'] = 'غير معروف'
-    else:
-      data['username'] = data['username'].strip()
-    # Strip whitespaces from comment
-    if data.get('comment'):
-        data['comment'] = data.get('comment').strip()
-    form = PodcastCommentForm(data)
-    
-    if form.is_valid():
-      comment = form.save(commit=False)
-      comment.podcast = self.object
-      
-      # Additional safety strip (redundant but safe)
-      if comment.comment:
-        comment.comment = comment.comment.strip()
-      if comment.username:
-        comment.username = comment.username.strip()
-      comment.save() 
-      # Redirect back to the same page with an anchor to the comments section
-      return redirect(reverse('podcasts:detail', kwargs={'slug': self.object.slug}) + '#comments-section')
-    
-    # If the form is invalid, re-render the page with errors
-    context = self.get_context_data(**kwargs)
-    context['form'] = form
-    return self.render_to_response(context)
+    # Additional safety strip (redundant but safe)
+    if comment.comment:
+      comment.comment = comment.comment.strip()
+    if comment.username:
+      comment.username = comment.username.strip()
+    comment.save() 
+    # Redirect back to the same page with an anchor to the comments section
+    return redirect(reverse('podcasts:detail', kwargs={'slug': self.object.slug}) + '#comments-section')
+  
+  # If the form is invalid, re-render the page with errors
+  context = self.get_context_data(**kwargs)
+  context['form'] = form
+  return self.render_to_response(context)

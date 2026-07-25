@@ -8,13 +8,11 @@
     <!-- 1. Hero Section (Premium Dark) -->
     <div class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-3xl overflow-hidden shadow-2xl mb-16 border border-gray-700 w-full animate-pop-in">
         
-        <!-- إضاءات ذهبية في الخلفية (Ambient Lights) -->
+        <!-- إضاءات ذهبية في الخلفية -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-[#cba358] rounded-full mix-blend-screen filter blur-[100px] opacity-20 pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 w-80 h-80 bg-[#d4af37] rounded-full mix-blend-screen filter blur-[120px] opacity-10 pointer-events-none"></div>
         
         <div class="relative z-10 flex flex-col md:flex-row items-center justify-between p-8 sm:p-12 lg:p-16 gap-8">
-            
-            <!-- محتوى النص -->
             <div class="flex-1 text-center md:text-right">
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/80 text-xs font-semibold mb-6 backdrop-blur-sm">
                     <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
@@ -43,9 +41,7 @@
                 </div>
             </div>
             
-            <!-- صورة أو أيقونة 3D -->
             <div class="flex-1 hidden md:flex justify-center items-center relative animate-soft-zoom">
-                <!-- يمكنك استبدال هذه بـ Image 3D لو عندك مستقبلاً -->
                 <div class="w-48 h-48 lg:w-64 lg:h-64 rounded-full bg-gradient-to-br from-[#cba358] to-[#9a7b42] p-1 shadow-2xl relative">
                     <div class="w-full h-full bg-gray-900 rounded-full flex items-center justify-center border-4 border-gray-800">
                         <svg class="w-24 h-24 lg:w-32 lg:h-32 text-[#cba358]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
@@ -55,31 +51,26 @@
         </div>
     </div>
 
-<!-- 2. أحدث حلقات البودكاست (Auto Slider) -->
-    <div class="mb-16">
-        <div class="flex justify-between items-end mb-6 border-b border-gray-200 pb-3">
-            <h3 class="text-xl sm:text-2xl font-black text-gray-900 flex items-center gap-2">
-                <span class="w-1.5 h-6 bg-[#cba358] rounded-full inline-block"></span>
-                أحدث حلقات البودكاست
-            </h3>
-            <a href="{% url 'podcasts:list' %}" class="text-xs sm:text-sm font-bold text-[#cba358] hover:text-[#b8914b] transition flex items-center gap-1">
-                عرض الكل <span dir="ltr">&larr;</span>
-            </a>
-        </div>
-
-        <!-- السلايدر -->
-        <div class="flex overflow-x-auto hide-scrollbar gap-4 sm:gap-6 pb-4 w-full cursor-grab active:cursor-grabbing auto-slider" dir="rtl">
-            {% for i in "123" %} <!-- تكرار الكروت عشان السكرول ميعلقش لو العدد قليل -->
+    <!-- 2. أحدث حلقات البودكاست (Auto Slider) -->
+<div class="flex overflow-x-auto hide-scrollbar gap-4 sm:gap-6 pb-4 w-full cursor-grab active:cursor-grabbing auto-slider" dir="rtl">
+            {% for i in "123" %} 
                 {% for podcast in latest_podcasts %}
                     <a href="{% url 'podcasts:detail' podcast.slug %}" class="w-64 sm:w-72 shrink-0 group block relative rounded-2xl overflow-hidden bg-gray-900 shadow-md hover:shadow-xl transition-all duration-500">
+                        
+                        <!-- هنا ضفنا البادج بتاع جديد وحصري -->
+                        {% if podcast.is_new %}
+                            <span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-md z-10 shadow-xs animate-pulse">جديد ⚡</span>
+                        {% else %}
+                            <span class="absolute top-3 right-3 bg-[#cba358] text-white text-[10px] font-bold px-2 py-1 rounded-md z-10 shadow-xs">حصري</span>
+                        {% endif %}
+
                         <div class="aspect-w-1 aspect-h-1 w-full relative">
                             {% if podcast.cover_image %}
-                                <img src="{{ podcast.cover_image.url }}" class="w-full h-48 sm:h-56 object-cover object-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                                <img src="{{ podcast.cover_image.url }}" loading="lazy" alt="{{ podcast.title }}" class="w-full h-48 sm:h-56 object-cover object-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
                             {% else %}
-                                <img src="{% static 'images/article_default_profile_avatar.webp' %}" class="w-full h-48 sm:h-56 object-cover object-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                                <img src="{% static 'images/article_default_profile_avatar.webp' %}" loading="lazy" alt="{{ podcast.title }}" class="w-full h-48 sm:h-56 object-cover object-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
                             {% endif %}
                             
-                            <!-- Play Button Overlay -->
                             <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors duration-500">
                                 <div class="w-12 h-12 bg-[#cba358]/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-[#cba358] transition-all duration-300">
                                     <svg class="w-5 h-5 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
@@ -98,23 +89,21 @@
                 </div>
             {% endif %}
         </div>
-    </div>
 
     <!-- 3. أحدث المقالات (Auto Slider) -->
     <div class="mb-10">
         <div class="flex justify-between items-end mb-6 border-b border-gray-200 pb-3">
-            <h3 class="text-xl sm:text-2xl font-black text-gray-900 flex items-center gap-2">
+            <h2 class="text-xl sm:text-2xl font-black text-gray-900 flex items-center gap-2">
                 <span class="w-1.5 h-6 bg-[#cba358] rounded-full inline-block"></span>
                 قلم الصحافة
-            </h3>
+            </h2>
             <a href="{% url 'articles:list' %}" class="text-xs sm:text-sm font-bold text-[#cba358] hover:text-[#b8914b] transition flex items-center gap-1">
                 كل المقالات <span dir="ltr">&larr;</span>
             </a>
         </div>
 
-        <!-- السلايدر -->
         <div class="flex overflow-x-auto hide-scrollbar gap-4 sm:gap-6 pb-4 w-full cursor-grab active:cursor-grabbing auto-slider" dir="rtl">
-            {% for i in "123" %} <!-- تكرار الكروت -->
+            {% for i in "123" %} 
                 {% for article in latest_articles %}
                     <div class="w-72 sm:w-80 shrink-0 bg-white rounded-xl shadow-xs border border-gray-100 hover:shadow-md transition-all duration-300 overflow-hidden group flex flex-col relative">
                         {% if article.is_new %}
@@ -123,9 +112,9 @@
 
                         <a href="{% url 'articles:detail' article.slug %}" class="block overflow-hidden relative">
                             {% if article.image %}
-                                <img src="{{ article.image.url }}" class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out">
+                                <img src="{{ article.image.url }}" loading="lazy" alt="{{ article.title }}" class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out">
                             {% else %}
-                                <img src="{% static 'images/article_default_profile_avatar.webp' %}" class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out">
+                                <img src="{% static 'images/article_default_profile_avatar.webp' %}" loading="lazy" alt="{{ article.title }}" class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out">
                             {% endif %}
                         </a>
                         

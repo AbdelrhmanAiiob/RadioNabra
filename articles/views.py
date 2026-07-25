@@ -21,7 +21,8 @@ class ArticleListView(ListView):
   paginate_by= 9 # how many article in singlePage
 
   def get_queryset(self):
-    qs= Article.objects.filter(is_published=True).order_by('-created_at')
+    # إضافة select_related('author') هنا لمنع N+1 
+    qs= Article.objects.select_related('author').filter(is_published=True).order_by('-created_at')
     query = self.request.GET.get('q')
     # if userSearch
     if query:
@@ -35,24 +36,24 @@ class ArticleDetailView(DetailView):
   context_object_name= 'article' # in HTML variableName no='object' yes='article'
 
   def get_queryset(self):
-    return Article.objects.filter(is_published=True)
+    return Article.objects.select_related('author').filter(is_published=True)
   
   # CommentsSide(GET-CommentRead-)
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     context['form'] = CommentForm()
     context['comments'] = self.object.comment_set.all()
-    context['related_articles'] = Article.objects.exclude(id=self.object.id).order_by('-created_at')[:6]
+    context['related_articles'] = Article.objects.select_related('author').exclude(id=self.object.id).order_by('-created_at')[:6]
     
     # pagination pages control
     try:
-        context['next_article']= self.object.get_next_by_created_at(is_published=True)
+      context['next_article']= self.object.get_next_by_created_at(is_published=True)
     except Article.DoesNotExist:
-        context['next_article']= None
+      context['next_article']= None
     try:
-        context['previous_article']= self.object.get_previous_by_created_at(is_published=True)
+      context['previous_article']= self.object.get_previous_by_created_at(is_published=True)
     except Article.DoesNotExist:
-        context['previous_article']= None
+      context['previous_article']= None
     return context
   
   # CommentsSide(POST-AddComment-)

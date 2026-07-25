@@ -43,6 +43,27 @@
 
 <body class="flex flex-col min-h-screen bg-gray-100 text-gray-900 font-sans antialiased">
 
+<!-- 404 -->
+<div id="preloader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-900 transition-opacity duration-700 ease-in-out">
+    <div class="relative w-20 h-20 flex items-center justify-center">
+      <div class="absolute inset-0 border-4 border-gray-700 border-t-[#cba358] rounded-full animate-spin"></div>
+      <svg class="w-8 h-8 text-[#cba358] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+    </div>
+    <h2 class="text-[#cba358] mt-4 font-black tracking-widest text-sm animate-pulse">راديو نبرة</h2>
+</div>
+
+<script>
+    function hidePreloader() {
+        const preloader = document.getElementById('preloader');
+        if (preloader && preloader.style.display !== 'none') {
+            preloader.style.opacity = '0';
+            setTimeout(() => { preloader.style.display = 'none'; }, 700);
+        }
+    }
+    window.addEventListener('load', hidePreloader);
+    setTimeout(hidePreloader, 5000);
+</script>
+
     {% include 'parts/navbar.html' %}
 
     <!-- Main Content -->

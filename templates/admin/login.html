@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل الدخول | إدارة راديو نبرة</title>
-    <!-- استخدام Tailwind CSS للتصميم السريع والفخم -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @keyframes smoothEntry {
@@ -21,14 +20,13 @@
 
     <div class="w-full max-w-md p-8 bg-gray-900/90 backdrop-blur-xl border border-gray-800/80 rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] animate-entry mx-4">
         
-        <!-- اللوجو الدائري والتوهج الذهبي -->
         <div class="text-center mb-8">
             <img src="{% static 'images/main_logo.webp' %}" alt="راديو نبرة" class="w-24 h-24 mx-auto rounded-full shadow-[0_0_25px_rgba(203,163,88,0.4)] object-cover border-2 border-[#cba358] transform hover:scale-105 transition-all duration-300">
             <h1 class="text-xl font-black text-white mt-4 tracking-wide">إدارة راديو نبرة</h1>
             <p class="text-gray-400 text-xs mt-1">منصتك الأولى للصحافة المسموعة</p>
         </div>
         
-        <!-- رسائل الخطأ لو وجدت -->
+
         {% if form.errors and not form.non_field_errors %}
             <div class="mb-5 p-3.5 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-xs text-center font-medium">
                 اسم المستخدم أو كلمة المرور غير صحيحة.
@@ -43,7 +41,6 @@
             {% endfor %}
         {% endif %}
 
-        <!-- فورم تسجيل الدخول -->
         <form action="{{ app_path }}" method="post" class="space-y-5">
             {% csrf_token %}
             
