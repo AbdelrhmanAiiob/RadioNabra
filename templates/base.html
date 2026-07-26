@@ -1,7 +1,19 @@
 {% load static %}
 <!DOCTYPE html>
+<!--
+  =============================================================================
+  Radio Nabra - Base Layout Template
+  =============================================================================
+  The master HTML wrapper for the entire application.
+  Includes anti-FOUC logic for theme switching, global meta/SEO tags, 
+  fonts, layout structure (sticky footer), and global JS/CSS assets.
+-->
 <html lang="ar" dir="rtl">
 <head>
+    <!-- 
+      1. Anti-FOUC (Flash of Unstyled Content) Script 
+      Executes synchronously before the DOM loads to apply the correct theme instantly.
+    -->
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark-mode');
@@ -9,72 +21,92 @@
             document.documentElement.classList.remove('dark-mode');
         }
     </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO -->
-    <meta name="author" content="Aiiob">
-    <meta name="description" content="Advanced article platform built with Django">
+    <!-- 2. SEO & Meta Information -->
+    <meta name="author" content="Abdelrhman Aiiob">
+    <meta name="description" content="Radio Nabra - Advanced podcast and article platform built with Django">
+    <meta name="keywords" content="راديو, بودكاست, مقالات, صحافة, نبرة">
     
-  <!--
-    ===========================================
-    Built by [Abdelrhman Aiiob]
-    Backend Developer: Python / Django
-    Email: aiiob@icloud.com or abdelrhmanaiiob@gmail.com
-    GitHub: https://github.com/AbdelrhmanAiiob
-    ===========================================
-  -->
+    <!--
+      ===========================================
+      Built by [Abdelrhman Aiiob]
+      Backend Developer: Python / Django
+      Email: aiiob@icloud.com | abdelrhmanaiiob@gmail.com
+      GitHub: https://github.com/AbdelrhmanAiiob
+      ===========================================
+    -->
 
-    
-    <title>{% block title %}{% endblock title %}</title>
+    <title>{% block title %}راديو نبرة{% endblock title %}</title>
 
-    <!-- Site Logo -->
+    <!-- 3. Favicon & Branding -->
     <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
     <link rel="alternate icon" href="{% static 'images/favicon.svg' %}">
 
+    <!-- 4. Fonts: Tajawal for elegant Arabic typography -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- External CSS -->
+    <!-- 5. Stylesheets -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     
-    <!-- Tailwind CDN (Keep for dev, remove in production) -->
+    <!-- 
+      TODO: Tailwind CDN is used here for rapid development. 
+      For production, compile a local `output.css` using Tailwind CLI to significantly 
+      reduce payload size and improve load times.
+    -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
+<!-- 
+  Flex & Min-H-Screen structure ensures the footer always sticks to the bottom 
+  even when page content is minimal (like on a 404 page).
+-->
 <body class="flex flex-col min-h-screen bg-gray-100 text-gray-900 font-sans antialiased">
 
-<!-- 404 -->
-<div id="preloader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-900 transition-opacity duration-700 ease-in-out">
-    <div class="relative w-20 h-20 flex items-center justify-center">
-      <div class="absolute inset-0 border-4 border-gray-700 border-t-[#cba358] rounded-full animate-spin"></div>
-      <svg class="w-8 h-8 text-[#cba358] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+    <!-- 
+      Global Preloader 
+      Masks initial asset loading with a branded loading animation.
+    -->
+    <div id="preloader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-900 transition-opacity duration-700 ease-in-out">
+        <div class="relative w-20 h-20 flex items-center justify-center">
+            <div class="absolute inset-0 border-4 border-gray-700 border-t-[#cba358] rounded-full animate-spin"></div>
+            <svg class="w-8 h-8 text-[#cba358] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+        </div>
+        <h2 class="text-[#cba358] mt-4 font-black tracking-widest text-sm animate-pulse">راديو نبرة</h2>
     </div>
-    <h2 class="text-[#cba358] mt-4 font-black tracking-widest text-sm animate-pulse">راديو نبرة</h2>
-</div>
 
-<script>
-    function hidePreloader() {
-        const preloader = document.getElementById('preloader');
-        if (preloader && preloader.style.display !== 'none') {
-            preloader.style.opacity = '0';
-            setTimeout(() => { preloader.style.display = 'none'; }, 700);
+    <!-- 
+      Preloader Fail-safe Logic 
+      Ensures the preloader disappears even if `window.onload` fires inconsistently.
+    -->
+    <script>
+        function hidePreloader() {
+            const preloader = document.getElementById('preloader');
+            if (preloader && preloader.style.display !== 'none') {
+                preloader.style.opacity = '0';
+                setTimeout(() => { preloader.style.display = 'none'; }, 700);
+            }
         }
-    }
-    window.addEventListener('load', hidePreloader);
-    setTimeout(hidePreloader, 5000);
-</script>
+        window.addEventListener('load', hidePreloader);
+        setTimeout(hidePreloader, 5000); // 5-second maximum fallback
+    </script>
 
+    <!-- Global Navigation -->
     {% include 'parts/navbar.html' %}
 
-    <!-- Main Content -->
+    <!-- Dynamic Content Injector -->
     <main class="flex-grow container mx-auto mt-10 px-4 mb-20">
         {% block content %}
         {% endblock content %}
     </main>
 
+    <!-- Global Footer -->
     {% include 'parts/footer.html' %}
 
-    <!-- External JS -->
+    <!-- Core Interactions & Animations -->
     <script src="{% static 'js/main.js' %}"></script>
+
 </body>
 </html>

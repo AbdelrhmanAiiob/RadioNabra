@@ -1,22 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<!--
+  =============================================================================
+  Radio Nabra - Article List / Search Results Template
+  =============================================================================
+  Displays a responsive grid of articles with pagination and search filtering.
+  Features staggered CSS animations, lazy-loaded images for performance, 
+  and a seamless CSS-only news ticker.
+-->
+
 {% block title %}المقالات{% endblock %}
 
 {% block content %}
 
-<!-- Header -->
+<!-- 
+  Dynamic Page Header
+  Adjusts title based on whether the user is performing a search query or 
+  viewing the default index.
+-->
 <div class="mb-12 text-center mt-6">
     <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-6 relative inline-block pb-3">
         {% if request.GET.q %}
             نتائج البحث عن: "{{ request.GET.q }}"
         {% else %}
-            <!-- هنا فصلنا الـ "و" عن "المقالات" بمسافة إجبارية -->
             آخر الأخبار و&nbsp;<span class="animate-pop-gold">المقالات</span>
         {% endif %}
         
         <span class="absolute bottom-0 w-full left-0 h-1 bg-[#cba358] rounded-full animate-breathe-line"></span>
     </h1>
+    
+    <!-- UX enhancement: Quick clear search button -->
     {% if request.GET.q %}
         <div class="mt-2">
             <a href="{% url 'articles:list' %}" class="text-xs text-[#cba358] hover:underline font-semibold">← إرجاع كل المقالات</a>
@@ -24,11 +38,16 @@
     {% endif %}
 </div>
 
-<!-- Article Grid -->
+<!-- 
+  Article Grid
+  Uses CSS Grid for responsive layout.
+  NOTE: Staggered entry animations are dynamically calculated using Django's forloop.counter.
+-->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
     {% for article in articles %}
         <div class="animate-pop-in bg-white rounded-xl shadow-xs border border-gray-100 hover:shadow-md transition-all duration-300 overflow-hidden group flex flex-col relative" style="animation-delay: calc({{ forloop.counter }} * 80ms);">
             
+            <!-- Dynamic Badges -->
             {% if article.is_new %}
                 <span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-md z-10 shadow-xs animate-pulse">جديد ⚡</span>
             {% else %}
@@ -36,6 +55,10 @@
             {% endif %}
 
             <a href="{% url 'articles:detail' article.slug %}" class="block overflow-hidden relative">
+                <!-- 
+                  Performance Optimization: `loading="lazy"` defers offscreen images 
+                  to improve initial page load speed (Core Web Vitals).
+                -->
                 {% if article.image %}
                     <img src="{{ article.image.url }}" loading="lazy" alt="{{ article.title }}" class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out">
                 {% else %}
@@ -48,6 +71,7 @@
                 <h2 class="text-base sm:text-lg font-bold text-gray-900 mb-2 line-clamp-2 leading-snug break-words break-all">
                     <a href="{% url 'articles:detail' article.slug %}" class="hover:text-[#cba358] transition duration-200">{{ article.title }}</a>
                 </h2>
+                <!-- Sanitized and truncated content preview -->
                 <p class="text-gray-500 text-xs sm:text-sm mb-4 flex-grow leading-relaxed line-clamp-3 break-words break-all">
                     {{ article.content|striptags|truncatewords:15 }}
                 </p>
@@ -61,6 +85,10 @@
             </div>
         </div>
     {% empty %}
+        <!-- 
+          Empty State / UX Fallback
+          Displays a friendly, stylized message when a search yields no results.
+        -->
         <div class="col-span-full text-center py-16 bg-white rounded-xl shadow-xs border border-gray-100 animate-pop-in">
             <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
             <p class="text-gray-500 text-sm font-medium">عذراً، لم يتم العثور على أي مقالات تطابق بحثك.</p>
@@ -68,7 +96,11 @@
     {% endfor %}
 </div>
 
-<!-- Ticker -->
+<!-- 
+  CSS-Only Infinite Ticker (Marquee)
+  Uses two identical groups cloned via Django template slice to create 
+  a seamless, hardware-accelerated continuous scrolling effect without JavaScript.
+-->
 <div class="max-w-4xl mx-auto mb-16 bg-white border border-gray-100 rounded-lg sm:rounded-xl shadow-sm flex items-center overflow-hidden h-7 sm:h-10 relative pause-on-hover">
     
     <div class="bg-gradient-to-r from-[#cba358] to-[#d4af37] text-white font-bold px-2 sm:px-4 h-full flex items-center relative z-20 shadow-sm shrink-0 text-[9px] sm:text-xs">
@@ -93,7 +125,7 @@
                 {% endfor %}
             </div>
 
-            <!-- Group 2 -->
+            <!-- Group 2 (Clone for seamless loop) -->
             <div class="flex items-center gap-4 sm:gap-6 px-2 sm:px-3 shrink-0 whitespace-nowrap" aria-hidden="true">
                 {% for article in articles|slice:":5" %}
                     <a href="{% url 'articles:detail' article.slug %}" class="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-xs font-semibold text-gray-600 hover:text-[#cba358] transition duration-300">
@@ -108,13 +140,19 @@
     </div>
 </div>
 
-<!-- Pagination -->
+<!-- 
+  Pagination System
+  Maintains the search query parameter (?q=...) across page navigation 
+  to prevent losing search state when moving to the next page.
+-->
 {% if is_paginated %}
     <div class="mt-8 flex justify-center items-center gap-2">
         {% if page_obj.has_previous %}
             <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" aria-label="الصفحة السابقة" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-full hover:border-[#cba358] hover:text-[#cba358] transition shadow-xs text-xs font-bold">&rarr;</a>
         {% endif %}
+        
         <span class="px-4 py-1.5 bg-gradient-to-r from-[#cba358] to-[#d4af37] text-white rounded-full text-xs font-bold shadow-xs">{{ page_obj.number }}</span>
+        
         {% if page_obj.has_next %}
             <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" aria-label="الصفحة التالية" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-full hover:border-[#cba358] hover:text-[#cba358] transition shadow-xs text-xs font-bold">&larr;</a>
         {% endif %}

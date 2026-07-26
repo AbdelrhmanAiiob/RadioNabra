@@ -1,67 +1,68 @@
-/* ==========================================
-  0. Dark Mode / Theme Toggle Logic
-========================================== */
-const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-const themeToggleBtn = document.getElementById('theme-toggle');
-
-if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark-mode');
-    if (themeToggleLightIcon) themeToggleLightIcon.classList.remove('hidden');
-} else {
-    document.documentElement.classList.remove('dark-mode');
-    if (themeToggleDarkIcon) themeToggleDarkIcon.classList.remove('hidden');
-}
-
-if (themeToggleBtn) {
-    themeToggleBtn.addEventListener('click', function() {
-        themeToggleDarkIcon.classList.toggle('hidden');
-        themeToggleLightIcon.classList.toggle('hidden');
-
-        if (localStorage.getItem('color-theme')) {
-            if (localStorage.getItem('color-theme') === 'light') {
-                document.documentElement.classList.add('dark-mode');
-                localStorage.setItem('color-theme', 'dark');
-            } else {
-                document.documentElement.classList.remove('dark-mode');
-                localStorage.setItem('color-theme', 'light');
-            }
-        } else {
-            if (document.documentElement.classList.contains('dark-mode')) {
-                document.documentElement.classList.remove('dark-mode');
-                localStorage.setItem('color-theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark-mode');
-                localStorage.setItem('color-theme', 'dark');
-            }
-        }
-    });
-}
-
-// 404
-window.addEventListener('load', function() {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        preloader.style.opacity = '0';
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 700);
-    }
-});
+/**
+ * ============================================================================
+ * Radio Nabra - Main Frontend JavaScript Architecture
+ * ============================================================================
+ * Handles global theme switching, preloader lifecycle, dynamic navigation,
+ * automated smooth sliders, and the high-performance Interactive Audio Transcript.
+ */
 
 document.addEventListener('DOMContentLoaded', function() {
-    
-    /* ==========================================
-      1. Navbar & Search Logic
-    ========================================== */
-const searchToggle = document.getElementById('search-toggle');
+
+    /* ========================================================================
+      0. Dark Mode / Theme Toggle Logic
+       ======================================================================== */
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const themeToggleBtn = document.getElementById('theme-toggle');
+
+    // Initialize theme based on local storage or user system preferences
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark-mode');
+        if (themeToggleLightIcon) themeToggleLightIcon.classList.remove('hidden');
+    } else {
+        document.documentElement.classList.remove('dark-mode');
+        if (themeToggleDarkIcon) themeToggleDarkIcon.classList.remove('hidden');
+    }
+
+    // Toggle theme state on button click and persist user preference
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark-mode');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark-mode');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark-mode')) {
+                    document.documentElement.classList.remove('dark-mode');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark-mode');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+    }
+
+    /* ========================================================================
+      1. Navbar, Mobile Menu & Animated Search Logic
+       ======================================================================== */
+    const searchToggle = document.getElementById('search-toggle');
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
+    
     let typingTimer;
-    const doneTypingInterval = 1000;
+    const doneTypingInterval = 1000; // 1 second debounce delay for search auto-submit
 
+    // Handle Mobile Menu toggle and outside-click dismissal
     if (menuToggle && mobileMenu) {
         menuToggle.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -75,6 +76,7 @@ const searchToggle = document.getElementById('search-toggle');
         });
     }
 
+    // Handle Search bar expansion and real-time debounce search
     if (searchToggle && searchForm && searchInput) {
         searchInput.value = '';
 
@@ -90,9 +92,9 @@ const searchToggle = document.getElementById('search-toggle');
             }
         });
 
+        // Debounced auto-submit on typing
         searchInput.addEventListener('input', function() {
             clearTimeout(typingTimer);
-            
             if (searchInput.value.trim() === '') return;
 
             typingTimer = setTimeout(function() {
@@ -113,9 +115,9 @@ const searchToggle = document.getElementById('search-toggle');
         });
     }
 
-/* ==========================================
-      2. Auto Sliders Logic (Handles Multiple Sliders)
-    ========================================== */
+    /* ========================================================================
+      2. Auto Sliders Logic (Handles Multiple Continuous Carousels)
+       ======================================================================== */
     const sliders = document.querySelectorAll('.auto-slider, #related-slider');
     
     sliders.forEach(slider => {
@@ -128,6 +130,7 @@ const searchToggle = document.getElementById('search-toggle');
                 
                 const maxScroll = slider.scrollWidth - slider.clientWidth;
                 
+                // Reset loop seamlessly when reaching the end
                 if (Math.abs(slider.scrollLeft) >= maxScroll - 1) {
                     slider.scrollLeft = 0; 
                 }
@@ -150,15 +153,16 @@ const searchToggle = document.getElementById('search-toggle');
 
         startAutoScroll();
 
+        // Pause auto-scrolling on user hover or touch interaction
         slider.addEventListener('mouseenter', stopAutoScroll);
         slider.addEventListener('touchstart', stopAutoScroll, {passive: true});
         slider.addEventListener('mouseleave', startAutoScroll);
         slider.addEventListener('touchend', startAutoScroll);
     });
 
-/* ==========================================
+    /* ========================================================================
       3. Audio Interactive Transcript Logic (GPU Hardware Accelerated)
-    ========================================== */
+       ======================================================================== */
     const rawTranscript = document.getElementById('raw-transcript');
     const interactiveContainer = document.getElementById('interactive-transcript');
     const audio = document.querySelector('audio');
@@ -167,6 +171,7 @@ const searchToggle = document.getElementById('search-toggle');
         const lines = rawTranscript.textContent.split('\n');
         let hasTimestamps = false;
         
+        // Parse raw text and extract timestamps [MM:SS] or [HH:MM:SS]
         lines.forEach(line => {
             const trimmedLine = line.trim();
             if (!trimmedLine) return;
@@ -177,6 +182,7 @@ const searchToggle = document.getElementById('search-toggle');
                 hasTimestamps = true;
                 let timeInSeconds = 0;
                 
+                // Calculate total seconds based on format match length
                 if (match[3]) {
                     timeInSeconds = parseInt(match[1]) * 3600 + parseInt(match[2]) * 60 + parseInt(match[3]);
                 } else {
@@ -188,6 +194,7 @@ const searchToggle = document.getElementById('search-toggle');
                 
                 if (audio) {
                     p.className = 'transcript-line text-gray-400 font-semibold hover:text-gray-500 cursor-pointer transition-all duration-300 transform-gpu origin-right pl-2 leading-loose';
+                    // Seek audio to specific timestamp when user clicks a transcript line
                     p.addEventListener('click', () => {
                         audio.currentTime = timeInSeconds;
                         audio.play();
@@ -208,11 +215,13 @@ const searchToggle = document.getElementById('search-toggle');
             }
         });
 
+        // Fallback if no timestamps exist in the transcript text
         if (!hasTimestamps) {
             interactiveContainer.innerHTML = rawTranscript.innerHTML.replace(/\n/g, '<br>');
             interactiveContainer.className = "force-wrap-content article-body w-full overflow-hidden text-gray-800 leading-loose mt-4";
         }
 
+        // Sync transcript lines with audio playback time update
         if (hasTimestamps && audio) {
             const transcriptLines = document.querySelectorAll('.transcript-line');
             const lineTimes = Array.from(transcriptLines).map(line => parseFloat(line.dataset.time));
@@ -223,12 +232,14 @@ const searchToggle = document.getElementById('search-toggle');
             
             audio.addEventListener('timeupdate', () => {
                 const now = Date.now();
+                // Throttle updates to every 100ms for optimal CPU/GPU performance
                 if (now - lastUpdate < 100) return;
                 lastUpdate = now;
 
                 const currentTime = audio.currentTime;
                 let newActiveIndex = -1;
                 
+                // Determine active line based on current playback time
                 for (let i = 0; i < lineTimes.length; i++) {
                     if (currentTime >= lineTimes[i]) {
                         newActiveIndex = i;
@@ -237,11 +248,12 @@ const searchToggle = document.getElementById('search-toggle');
                     }
                 }
                 
+                // Update DOM classes smoothly via requestAnimationFrame
                 if (newActiveIndex !== currentActiveIndex) {
                     if (rafId) cancelAnimationFrame(rafId);
                     
                     rafId = requestAnimationFrame(() => {
-                        
+                        // Deactivate previous active line
                         if (currentActiveIndex >= 0 && transcriptLines[currentActiveIndex]) {
                             const oldLine = transcriptLines[currentActiveIndex];
                             const oldSpan = oldLine.querySelector('span');
@@ -255,6 +267,7 @@ const searchToggle = document.getElementById('search-toggle');
                             }
                         }
                         
+                        // Activate new current line
                         if (newActiveIndex >= 0 && transcriptLines[newActiveIndex]) {
                             const newLine = transcriptLines[newActiveIndex];
                             const newSpan = newLine.querySelector('span');
@@ -273,5 +286,18 @@ const searchToggle = document.getElementById('search-toggle');
                 }
             });
         }
+    }
+});
+
+/* ============================================================================
+  4. Global Page Preloader Lifecycle Handler
+   ============================================================================ */
+window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 700); // Matches CSS transition duration
     }
 });

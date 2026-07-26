@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('nabra-control-admin', admin.site.urls),
     path('', include('home.urls'), name='home'),
     path('articles/', include('articles.urls'), name='articles'),
     path('podcasts/', include('podcasts.urls'), name='podcasts'),

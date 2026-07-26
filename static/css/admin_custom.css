@@ -1,16 +1,28 @@
-  /* =========================================
-  Unfold Admin Premium UI/UX (Radio Nabra)
-  ========================================= */
+/**
+ * ==========================================
+ * Unfold Admin Premium UI/UX (Radio Nabra)
+ * ==========================================
+ * This file extends and overrides Django Unfold's default styling.
+ * Uses !important tags defensively to override injected Tailwind classes 
+ * in the admin auth and layout templates.
+ */
+
+/* --- 1. Keyframes & Page Load Animations --- */
 
 @keyframes smoothEntry {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
 }
 
+/* Apply smooth entry animation to main admin wrappers and auth containers */
 main, #main, .flex.items-center.justify-center {
     animation: smoothEntry 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards !important;
 }
 
+
+/* --- 2. Branding & Logo Styling --- */
+
+/* Target the login logo specifically to apply circular mask and gold glow */
 img[src*="main_logo"] {
     max-height: 85px !important;
     border-radius: 50% !important; 
@@ -24,6 +36,10 @@ img[src*="main_logo"]:hover {
     box-shadow: 0 6px 20px rgba(203, 163, 88, 0.4) !important;
 }
 
+
+/* --- 3. Interactive Elements (Buttons & Inputs) --- */
+
+/* Primary submit button overrides for hover glow and scaling */
 button[type="submit"], .bg-primary-600 {
     transition: all 0.3s ease !important;
     box-shadow: 0 4px 10px rgba(203, 163, 88, 0.15) !important;
@@ -35,8 +51,11 @@ button[type="submit"]:hover, .bg-primary-600:hover {
     filter: brightness(1.1);
 }
 
+/* Input field focus states matching the Radio Nabra brand identity */
 input:focus, textarea:focus, select:focus {
     box-shadow: 0 0 0 2px rgba(203, 163, 88, 0.2) !important;
     border-color: #cba358 !important;
     transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
+
+/* TODO: If overrides grow further, consider injecting these variables directly into Unfold's Tailwind configuration in settings.py. */

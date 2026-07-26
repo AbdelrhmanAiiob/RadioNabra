@@ -1,62 +1,70 @@
+"""
+Admin configuration for the Articles application.
+Integrates with Django Unfold for a modern, Tailwind-based UI.
+Manages permissions, custom querysets, and automatic field population.
+"""
+
 from django.contrib import admin
 from unfold.admin import ModelAdmin
 from .models import Article, Comment
 
-# main article
 @admin.register(Article)
 class ArticleAdmin(ModelAdmin):
-  list_display= ('title', 'author', 'is_published', 'created_at')
-
-  # Automatically fills the 'slug' field based on what you type in the 'title' field.
-  prepopulated_fields= {'slug': ('title',)}
-
-  # Hides the specified fields from the admin add/change form.
-  exclude= ('author',)
-
-  def get_queryset(self, request):
     """
-      Overrides the default queryset to restrict access.
-      Superusers can see all records, while regular staff (authors) 
-      can only see and manage their own records.
+    Admin interface for the Article model.
+    Restricts authors to only manage their own articles while allowing superusers full access.
     """
-  
-    qs= super().get_queryset(request)
+    list_display = ('title', 'author', 'is_published', 'created_at')
     
-    # If user is the admin. 
-    if request.user.is_superuser:
-      return qs
-  
-    # If normal user return he's own articles.
-    return qs.filter(author=request.user)
+    # Auto-generate the slug based on the title for better SEO and UX.
+    prepopulated_fields = {'slug': ('title',)}
+    
+    # Hide the author field; it will be automatically set in the save_model method.
+    exclude = ('author',)
 
-  def save_model(self, request, obj, form, change):
-    """
-      Overrides the default save behavior.
-      Automatically assigns the currently logged-in user as the 'author' 
-      when a new record is created.
-    """
-  
-    if not obj.pk: # New article.
-      obj.author = request.user
-    super().save_model(request, obj, form, change)
+    # TODO: Consider adding 'search_fields' and 'list_filter' (e.g., by date or status) for easier navigation when articles grow.
 
-# commentSide
+    def get_queryset(self, request):
+        """
+        Override the default queryset to implement row-level permissions.
+        Superusers view all records; standard staff view only their own records.
+        """
+        qs = super().get_queryset(request)
+        
+        if request.user.is_superuser:
+            return qs
+        
+        return qs.filter(author=request.user)
+
+    def save_model(self, request, obj, form, change):
+        """
+        Override the save behavior to automatically assign the logged-in user 
+        as the author of the article upon creation.
+        """
+        if not obj.pk:  # Check if this is a new article being created
+            obj.author = request.user
+        super().save_model(request, obj, form, change)
+
+
 @admin.register(Comment)
 class CommentAdmin(ModelAdmin):
-  list_display = ('username', 'article', 'comment_date') # appear fields
-  list_filter = ('comment_date', 'article')              # fields filter
-  search_fields = ('username', 'comment')                # fields search
+    """
+    Admin interface for the Comment model.
+    Ensures authors can only moderate comments related to their own articles.
+    """
+    list_display = ('username', 'article', 'comment_date') 
+    list_filter = ('comment_date', 'article')              
+    search_fields = ('username', 'comment')                
 
-  def get_queryset(self, request):
-    """
-      Super user=> can see all,
-      norma user=> just see he's comments or related to he's articles
-    """
-    qs = super().get_queryset(request)
-    
-    # if superUser
-    if request.user.is_superuser:
-      return qs
-    
-    # if normalUser filter the related comments and get the article author
-    return qs.filter(article__author=request.user)
+    def get_queryset(self, request):
+        """
+        Filter comments based on user role. 
+        Superusers see all; authors see comments attached to their specific articles.
+        """
+        qs = super().get_queryset(request)
+        
+        if request.user.is_superuser:
+            return qs
+        
+        # Traverse the relationship: Comment -> Article -> Author
+        return qs.filter(article__author=request.user)

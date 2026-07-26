@@ -1,26 +1,46 @@
-from pathlib import Path
+"""
+Django settings for the Radio Nabra project.
+Configures environments, databases, security protocols, and third-party integrations (e.g., Unfold).
+Follows industry best practices by utilizing environment variables (.env) for sensitive data.
+"""
+
 import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from a .env file into the system's environment
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ==========================================
+# SECURITY & CORE SETTINGS
+# ==========================================
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!%eu+_*ma-(+%k=a-dw(qy#75$pae5*hc%l$*x)*-zbmu$je&^'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Parses the string 'True'/'False' from the .env file into a Python boolean
+DEBUG = True # os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*']
+# Defines which host/domain names this Django site can serve
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1').split(',')
 
 
-# Application definition
+# ==========================================
+# APPLICATIONS & MIDDLEWARE
+# ==========================================
+
 INSTALLED_APPS = [
-  
-    # for adminPanel edit
+    # --- Third-Party Apps ---
+    # Unfold: A modern, Tailwind CSS-based admin interface
     'unfold',
     'unfold.contrib.filters',
     'unfold.contrib.forms',
     
+    # --- Django Core Apps ---
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -28,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    # ParentAPPs
+    # --- Local Apps ---
     'home.apps.HomeConfig',
     'articles.apps.ArticlesConfig',
     'podcasts.apps.PodcastsConfig',
@@ -36,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # TODO: Add 'whitenoise.middleware.WhiteNoiseMiddleware' here later for efficient static files serving in production.
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -64,49 +85,53 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
-# Database
+# ==========================================
+# DATABASE CONFIGURATION
+# ==========================================
+# Uses PostgreSQL for robust, production-ready data management.
+# Credentials are securely fetched from environment variables.
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
 
-# Password validation
+# ==========================================
+# PASSWORD VALIDATION & INTERNATIONALIZATION
+# ==========================================
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-
-# Internationalization
 LANGUAGE_CODE = 'ar'
 TIME_ZONE = 'Africa/Cairo'
 USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles')
+# ==========================================
+# STATIC & MEDIA FILES
+# ==========================================
+# Static files (CSS, JS, Images) used by the application
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static')
 ]
 
-# Media files
-MEDIA_ROOT= os.path.join(BASE_DIR, 'media')
+# User-uploaded files (e.g., Article images, Podcast audio)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 
 # ==========================================
 # UNFOLD ADMIN PANEL SETTINGS
@@ -128,7 +153,6 @@ UNFOLD = {
     "STYLES": [
         lambda request: static("css/admin_custom.css"),
     ],
-    
     "COLORS": {
         "primary": {
             "50": "#fbf8f1",
@@ -136,7 +160,7 @@ UNFOLD = {
             "200": "#ebdcb0",
             "300": "#e0c57f",
             "400": "#d4af37",
-            "500": "#cba358", # main color
+            "500": "#cba358", # Brand primary color (Gold)
             "600": "#b8914b",
             "700": "#9a763c",
             "800": "#7f6235",
@@ -145,10 +169,7 @@ UNFOLD = {
     },
     "TABS": [
         {
-            "models": [
-                "articles.article",
-                "articles.comment",
-            ],
+            "models": ["articles.article", "articles.comment"],
             "items": [
                 {"title": "المقالات", "link": "/admin/articles/article/"},
                 {"title": "التعليقات", "link": "/admin/articles/comment/"},
@@ -156,3 +177,24 @@ UNFOLD = {
         },
     ],
 }
+
+
+# ==========================================
+# PRODUCTION SECURITY SETTINGS
+# ==========================================
+# TODO: Uncomment 'SECURE_SSL_REDIRECT = True' when deploying to production with an active SSL certificate.
+
+# Ensures cookies are only sent over HTTPS
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# Enables the browser's built-in XSS protection
+SECURE_BROWSER_XSS_FILTER = True
+
+# Prevents the site from being rendered inside an iframe (Clickjacking protection)
+X_FRAME_OPTIONS = 'DENY' 
+
+# HTTP Strict Transport Security (HSTS): Forces browsers to use HTTPS for the specified duration (1 year)
+SECURE_HSTS_SECONDS = 31536000 
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True

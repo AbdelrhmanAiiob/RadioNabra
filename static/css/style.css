@@ -1,8 +1,17 @@
+/**
+ * ==========================================
+ * Main Global Stylesheet (Radio Nabra)
+ * ==========================================
+ * Manages the CSS Variable theming system, global typography, 
+ * custom keyframe animations, and rich-text parsing.
+ */
+
+
 /* ==========================================
-  CSS Variables (Theme System)
-========================================== */
+  1. THEME SYSTEM & CSS VARIABLES
+   ========================================== */
 :root {
-    /* (Light Mode - Default) */
+    /* (Light Mode - Default Palette) */
     --bg-primary: #f3f4f6; 
     --bg-secondary: #ffffff;
     --bg-tertiary: #f9fafb; 
@@ -22,7 +31,7 @@
     --shadow-soft: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
-/* (Dark Mode) */
+/* (Dark Mode Overrides) - Toggled via JS or user OS preference */
 .dark-mode {
     --bg-primary: #111827; 
     --bg-secondary: #1f2937; 
@@ -38,64 +47,42 @@
     --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
 }
 
+
+/* ==========================================
+  2. GLOBAL OVERRIDES & TYPOGRAPHY
+   ========================================== */
+/* Apply smooth transitions when switching between Light/Dark modes */
 body {
     background-color: var(--bg-primary) !important;
     color: var(--text-primary) !important;
     transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
 }
 
-.bg-white, .bg-gray-50 {
-    background-color: var(--bg-secondary) !important;
-    transition: background-color 0.4s ease-in-out;
-}
+/* Override Tailwind background utility classes to respect custom CSS variables */
+.bg-white { background-color: var(--bg-secondary) !important; transition: background-color 0.4s ease-in-out; }
+.bg-gray-50 { background-color: var(--bg-tertiary) !important; transition: background-color 0.4s ease-in-out; }
 
-.bg-white {
-    background-color: var(--bg-secondary) !important;
-    transition: background-color 0.4s ease-in-out;
-}
+/* Override Tailwind text and border utility classes */
+.text-gray-900, .text-gray-800 { color: var(--text-primary) !important; }
+.text-gray-600, .text-gray-500, .text-gray-700 { color: var(--text-secondary) !important; }
+.border-gray-100, .border-gray-200, .border-gray-50, .border-b { border-color: var(--border-color) !important; transition: border-color 0.4s ease-in-out; }
+.shadow-xs, .shadow-sm, .shadow-md { box-shadow: var(--shadow-soft) !important; }
+.bg-gradient-to-br, .bg-gray-900, .bg-gradient-to-r { background-color: initial !important; }
 
-.bg-gray-50 {
-    background-color: var(--bg-tertiary) !important;
-    transition: background-color 0.4s ease-in-out;
-}
-
-.text-gray-900, .text-gray-800 {
-    color: var(--text-primary) !important;
-}
-
-.text-gray-600, .text-gray-500, .text-gray-700 {
-    color: var(--text-secondary) !important;
-}
-
-.border-gray-100, .border-gray-200, .border-gray-50, .border-b {
-    border-color: var(--border-color) !important;
-    transition: border-color 0.4s ease-in-out;
-}
-
-.shadow-xs, .shadow-sm, .shadow-md {
-    box-shadow: var(--shadow-soft) !important;
-}
-
-
-.bg-gradient-to-br, .bg-gray-900, .bg-gradient-to-r {
-    background-color: initial !important; 
-}
-
-/* Core Typography */
+/* Core Typography: Enforce 'Tajawal' for proper Arabic rendering */
 body, h1, h2, h3, h4, h5, h6, p, a, span, div, button {
     font-family: 'Tajawal', sans-serif !important;
 }
 
+
+/* ==========================================
+  3. KEYFRAMES
+   ========================================== */
 @keyframes pageFadeIn {
     0% { opacity: 0; transform: translateY(10px); }
     100% { opacity: 1; transform: translateY(0); }
 }
 
-body {
-    animation: pageFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Animations */
 @keyframes seamlessTicker {
     0% { transform: translateX(-50%); }
     100% { transform: translateX(0%); }
@@ -103,13 +90,7 @@ body {
 
 @keyframes infinite-scroll-rtl {
     0% { transform: translateX(0); }
-    100% { transform: translateX(50%); } 
-}
-.animate-infinite-ticker {
-    display: flex;
-    width: max-content;
-    animation: infinite-scroll-rtl 5s linear infinite; 
-    will-change: transform; 
+    100% { transform: translateX(50%); } /* Positive translation for RTL flow */
 }
 
 @keyframes popIn {
@@ -128,116 +109,95 @@ body {
 }
 
 @keyframes pop-gold {
-    0% {
-        transform: scale(1);
-        color: inherit;
-    }
-    60% {
-        transform: scale(1.15);
-        color: #cba358;
-        text-shadow: 0 0 15px rgba(203, 163, 88, 0.8);
-    }
-    100% {
-        transform: scale(1.05);
-        color: #cba358;
-        text-shadow: 0 0 5px rgba(203, 163, 88, 0.4);
-    }
+    0% { transform: scale(1); color: inherit; }
+    60% { transform: scale(1.15); color: #cba358; text-shadow: 0 0 15px rgba(203, 163, 88, 0.8); }
+    100% { transform: scale(1.05); color: #cba358; text-shadow: 0 0 5px rgba(203, 163, 88, 0.4); }
 }
 
-/* أنيميشن نبض وتنفس للخط */
 @keyframes breathe-line {
-    0%, 100% {
-        transform: scaleX(0.85); /* بيكون أقصر شوية */
-        opacity: 0.6; /* شفاف شوية */
-        box-shadow: 0 0 2px rgba(203, 163, 88, 0.1);
-    }
-    50% {
-        transform: scaleX(1.05); /* بيمط لبرة شوية */
-        opacity: 1; /* لونه بيبقى واضح تماماً */
-        box-shadow: 0 0 15px rgba(203, 163, 88, 0.9); /* بيعمل توهج قوي */
-    }
+    0%, 100% { transform: scaleX(0.85); opacity: 0.6; box-shadow: 0 0 2px rgba(203, 163, 88, 0.1); }
+    50% { transform: scaleX(1.05); opacity: 1; box-shadow: 0 0 15px rgba(203, 163, 88, 0.9); }
 }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ==========================================
+  4. ANIMATION UTILITY CLASSES
+   ========================================== */
+/* Attach keyframes to classes for modular usage in HTML (Tailwind-style) */
+body { animation: pageFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
 .animate-breathe-line {
-    /* الحركة دي هتفضل شغالة لما لا نهاية (infinite) وكل لفة بتاخد 2.5 ثانية */
     animation: breathe-line 2.5s infinite ease-in-out;
-    transform-origin: center; /* السطر ده سحري عشان يخلي الخط يكبر ويصغر من النص بالظبط وميحدفش يمين تاني */
+    transform-origin: center; /* Ensures scaling originates from the center */
 }
 
 .animate-pop-gold {
-    display: inline-block; /* مهم جداً عشان التكبير يشتغل */
+    display: inline-block; 
     animation: pop-gold 0.8s ease-out forwards;
     animation-delay: 0.3s;
 }
 
-/* Animation Classes */
 .animate-ticker {
     display: flex;
     width: max-content;
     animation: seamlessTicker 5s linear infinite;
-    will-change: transform;
+    will-change: transform; /* Hardware acceleration */
 }
 
 .animate-infinite-ticker {
     display: flex;
-    animation: infinite-scroll-rtl 20s linear infinite;
     width: max-content;
+    animation: infinite-scroll-rtl 20s linear infinite;
+    will-change: transform; 
 }
 
-.animate-pop-in {
-    animation: popIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    opacity: 0; 
-}
+.animate-pop-in { animation: popIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+.animate-draw-line { animation: drawLine 0.8s ease-out forwards; animation-delay: 0.2s; width: 0; }
+.animate-soft-zoom { animation: softZoom 2.5s infinite ease-in-out; }
+.animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
 
-.animate-draw-line {
-    animation: drawLine 0.8s ease-out forwards;
-    animation-delay: 0.2s; 
-    width: 0; 
-}
-
-.animate-soft-zoom {
-    animation: softZoom 2.5s infinite ease-in-out;
-}
-
+/* Pause animations on user interaction for better accessibility */
 .pause-on-hover:hover .animate-infinite-ticker,
 .pause-on-hover:hover .animate-ticker {
     animation-play-state: paused;
 }
 
-/* Utilities */
+
+/* ==========================================
+  5. HELPERS & LAYOUT UTILITIES
+   ========================================== */
+/* Cross-browser scrollbar hiding */
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-
-.force-wrap-content {
+/* Force word-wrapping to prevent layout breakage on long links or strings */
+.force-wrap-content, .force-wrap-content * {
     overflow-wrap: anywhere !important; 
     max-width: 100% !important; 
 }
 
-.force-wrap-content * {
-    max-width: 100% !important;
-    overflow-wrap: anywhere !important;
-}
 
-.article-body {
-    color: #374151; 
-    line-height: 2.2; 
-    font-size: 1.125rem; 
-}
-@media (max-width: 640px) {
-    .article-body { font-size: 1rem; line-height: 2; }
-}
+/* ==========================================
+  6. RICH TEXT PARSER (.article-body)
+   ========================================== */
+/* 
+ * Scoped styles for rendering dynamic, user-generated HTML content safely.
+ * TODO: Consider migrating this section to Tailwind's official @tailwindcss/typography plugin in the future.
+ */
+.article-body { color: #374151; line-height: 2.2; font-size: 1.125rem; }
+@media (max-width: 640px) { .article-body { font-size: 1rem; line-height: 2; } }
+
 .article-body p { margin-bottom: 1.5em; }
-.article-body h1, .article-body h2, .article-body h3 { 
-    color: #111827; 
-    font-weight: 800; 
-    margin-top: 2em; 
-    margin-bottom: 1em; 
-    line-height: 1.4;
-}
+.article-body h1, .article-body h2, .article-body h3 { color: #111827; font-weight: 800; margin-top: 2em; margin-bottom: 1em; line-height: 1.4; }
 .article-body a { color: #cba358; text-decoration: underline; font-weight: 600; }
 .article-body ul { list-style-type: disc; margin-right: 1.5em; margin-bottom: 1.5em; }
 .article-body ol { list-style-type: decimal; margin-right: 1.5em; margin-bottom: 1.5em; }
+
 .article-body blockquote { 
     border-right: 4px solid #cba358; 
     padding-right: 1.5em; 
@@ -248,6 +208,7 @@ body {
     margin-bottom: 1.5em;
     font-style: italic;
 }
+
 .article-body img { 
     border-radius: 1rem; 
     margin: 2em auto; 
@@ -256,23 +217,11 @@ body {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); 
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-.animate-fade-in-up {
-    animation: fadeInUp 0.8s ease-out forwards;
-    opacity: 0; /* بيبدأ مخفي عشان الأنيميشن يظهره */
-}
-
-/* تأخير ظهور الكروت عشان يظهروا ورا بعض بشكل شيك */
+/* ==========================================
+  7. STAGGERED DELAYS
+   ========================================== */
+/* Sequential load delays for grid items (e.g., Article Cards) */
 .delay-100 { animation-delay: 0.1s; }
 .delay-200 { animation-delay: 0.2s; }
 .delay-300 { animation-delay: 0.3s; }

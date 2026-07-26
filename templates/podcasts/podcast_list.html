@@ -1,11 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<!--
+  =============================================================================
+  Radio Nabra - Podcast List / Search Results Template
+  =============================================================================
+  Displays a grid of available podcast episodes. Includes specific UI enhancements 
+  for audio content such as duration badges, play icon overlays on hover, 
+  and a seamless infinite scrolling news ticker.
+-->
+
 {% block title %}البودكاست{% endblock %}
 
 {% block content %}
 
-<!-- Header -->
+<!-- 
+  Dynamic Header 
+  Adapts the title based on the presence of a search query in the URL.
+-->
 <div class="mb-12 text-center mt-6">
     <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-6 relative inline-block pb-3">
         {% if request.GET.q %}
@@ -14,7 +26,6 @@
             أحدث حلقات <span class="animate-pop-gold">البودكاست</span>
         {% endif %}
         
-        <!-- مسحنا الكلاس القديم وحطينا animate-breathe-line -->
         <span class="absolute bottom-0 w-full left-0 h-1 bg-[#cba358] rounded-full animate-breathe-line"></span>
     </h1>
     {% if request.GET.q %}
@@ -24,18 +35,25 @@
     {% endif %}
 </div>
 
-<!-- Podcast Grid -->
+<!-- 
+  Podcast Grid Layout 
+  Utilizes staggered animations calculated dynamically via Django's forloop.counter
+-->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
     {% for podcast in podcasts %}
         <div class="animate-pop-in bg-white rounded-xl shadow-xs border border-gray-100 hover:shadow-md transition-all duration-300 overflow-hidden group flex flex-col relative" style="animation-delay: calc({{ forloop.counter }} * 80ms);">
             
+            <!-- Contextual Top Badges -->
             {% if podcast.is_new %}
                 <span class="absolute top-3 right-3 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-md z-10 shadow-xs animate-pulse">جديد ⚡</span>
             {% else %}
                 <span class="absolute top-3 right-3 bg-[#cba358] text-white text-[10px] font-bold px-2 py-1 rounded-md z-10 shadow-xs">حصري</span>
             {% endif %}
 
-            <!-- Duration Badge -->
+            <!-- 
+              Duration Badge Overlay 
+              Displays audio length, enhancing UX before the user commits to a click.
+            -->
             {% if podcast.duration %}
                 <span class="absolute bottom-3 left-3 bg-gray-900/80 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-md z-10 shadow-xs flex items-center gap-1">
                     <svg class="w-3 h-3 text-[#cba358]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -44,13 +62,14 @@
             {% endif %}
 
             <a href="{% url 'podcasts:detail' podcast.slug %}" class="block overflow-hidden relative">
+                <!-- Performance: Lazy loaded images for optimal Core Web Vitals -->
                 {% if podcast.cover_image %}
                     <img src="{{ podcast.cover_image.url }}" loading="lazy" alt="{{ podcast.title }}" class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out">
                 {% else %}
                     <img src="{% static 'images/article_default_profile_avatar.webp' %}" loading="lazy" alt="{{ podcast.title }}" class="w-full h-44 object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-in-out">
                 {% endif %}
                 
-                <!-- Play Icon Overlay -->
+                <!-- Play Icon Hover Overlay (Indicates Audio Content) -->
                 <div class="absolute inset-0 bg-black bg-opacity-10 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                     <div class="w-12 h-12 bg-[#cba358]/90 rounded-full flex items-center justify-center transform scale-75 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 shadow-lg shadow-[#cba358]/40 pl-1">
                         <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
@@ -58,10 +77,12 @@
                 </div>
             </a>
             
+            <!-- Podcast Meta Data -->
             <div class="p-4 sm:p-5 flex flex-col flex-grow bg-white">
                 <h2 class="text-base sm:text-lg font-bold text-gray-900 mb-2 line-clamp-2 leading-snug break-words break-all">
                     <a href="{% url 'podcasts:detail' podcast.slug %}" class="hover:text-[#cba358] transition duration-200">{{ podcast.title }}</a>
                 </h2>
+                <!-- Sanitized description fallback -->
                 <p class="text-gray-500 text-xs sm:text-sm mb-4 flex-grow leading-relaxed line-clamp-3 break-words break-all">
                     {{ podcast.description|striptags|truncatewords:15 }}
                 </p>
@@ -75,6 +96,7 @@
             </div>
         </div>
     {% empty %}
+        <!-- Empty State UI -->
         <div class="col-span-full text-center py-16 bg-white rounded-xl shadow-xs border border-gray-100 animate-pop-in">
             <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
             <p class="text-gray-500 text-sm font-medium">عذراً، لم يتم العثور على أي حلقات تطابق بحثك.</p>
@@ -82,7 +104,10 @@
     {% endfor %}
 </div>
 
-<!-- Ticker -->
+<!-- 
+  CSS-Only Infinite Ticker
+  Loops the latest episodes seamlessly across the screen. 
+-->
 <div class="max-w-4xl mx-auto mb-16 bg-white border border-gray-100 rounded-lg sm:rounded-xl shadow-sm flex items-center overflow-hidden h-7 sm:h-10 relative pause-on-hover">
     <div class="bg-gradient-to-r from-[#cba358] to-[#d4af37] text-white font-bold px-2 sm:px-4 h-full flex items-center relative z-20 shadow-sm shrink-0 text-[9px] sm:text-xs">
         <span class="relative z-10 flex items-center gap-1">
@@ -105,7 +130,7 @@
                 {% endfor %}
             </div>
 
-            <!-- Group 2 -->
+            <!-- Group 2 (Clone for seamless loop effect) -->
             <div class="flex items-center gap-4 sm:gap-6 px-2 sm:px-3 shrink-0 whitespace-nowrap" aria-hidden="true">
                 {% for podcast in podcasts|slice:":5" %}
                     <a href="{% url 'podcasts:detail' podcast.slug %}" class="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-xs font-semibold text-gray-600 hover:text-[#cba358] transition duration-300">
@@ -118,13 +143,18 @@
     </div>
 </div>
 
-<!-- Pagination -->
+<!-- 
+  Pagination System 
+  Ensures that `request.GET.q` is preserved when navigating through search result pages.
+-->
 {% if is_paginated %}
     <div class="mt-8 flex justify-center items-center gap-2 mb-10">
         {% if page_obj.has_previous %}
             <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" aria-label="الصفحة السابقة" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-full hover:border-[#cba358] hover:text-[#cba358] transition shadow-xs text-xs font-bold">&rarr;</a>
         {% endif %}
+        
         <span class="px-4 py-1.5 bg-gradient-to-r from-[#cba358] to-[#d4af37] text-white rounded-full text-xs font-bold shadow-xs">{{ page_obj.number }}</span>
+        
         {% if page_obj.has_next %}
             <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" aria-label="الصفحة التالية" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-full hover:border-[#cba358] hover:text-[#cba358] transition shadow-xs text-xs font-bold">&larr;</a>
         {% endif %}
