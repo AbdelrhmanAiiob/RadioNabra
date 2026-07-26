@@ -172,10 +172,10 @@
                 {% for rel_article in related_articles %}
                     <a href="{% url 'articles:detail' rel_article.slug %}" class="w-32 h-44 sm:w-56 sm:h-56 shrink-0 bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group block relative">
                         {% if rel_article.image %}
-                            <img src="{{ rel_article.image.url }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                            <img src="{{ rel_article.image.url }}" alt="{{ rel_article.title }}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" loading="lazy">
                         {% else %}
-                            <img src="{% static 'images/article_default_profile_avatar.webp' %}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
-                        {% endif %}
+                            <img src="{% static 'images/article_default_profile_avatar.webp' %}" alt="default" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                        {% endif %} 
                         
                         <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-2 sm:p-4">
                             {% if rel_article.is_new %}
