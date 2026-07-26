@@ -2,146 +2,179 @@
 
 <!--
   =============================================================================
-  Radio Nabra - Global Navigation Bar Component
+  Radio Nabra - Global Navigation Bar Component (Updated)
   =============================================================================
   Features a dual-tier architecture: 
-  1. A 'Top Mini Bar' for social links, quick actions, and Theme (Dark/Light) toggle.
-  2. A 'Main Sticky Navbar' with a brand logo, dynamic active-state routing, 
-     an animated expandable search input, and a fully responsive mobile drawer.
+  1. A 'Top Mini Bar' with better clarity in White Mode, larger social links,
+     and a highly visible, animated, cartoon-style Theme toggle.
+  2. A 'Main Sticky Navbar' with enhanced accessibility, better active-state 
+     visuals, and refined colors for both Light and Dark modes.
 -->
 
+{% load static %}
 <!-- ==========================================
-     1. Top Mini Bar
+     1. Top Mini Bar (Professional Dark Strip)
      ========================================== -->
-<div class="bg-gray-50 border-b border-gray-100 text-[10px] sm:text-[11px] py-1.5 transition-colors duration-400">
-    <div class="container mx-auto px-4 flex justify-between items-center text-gray-500">
+<div class="bg-gray-900 border-b border-gray-800 text-[11px] sm:text-[12px] py-1.5 transition-colors duration-400">
+    <div class="container mx-auto px-4 flex justify-between items-center text-white">
         
         <!-- Social Icons (Left Side RTL) -->
-        <div class="flex items-center gap-3 text-[#cba358]">
-            <a href="https://www.facebook.com/RadioNabra/" target="_blank" class="hover:text-[#b8914b] transition transform hover:scale-110" aria-label="صفحتنا على فيسبوك" title="Facebook">
-                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.324V1.325C24 .597 23.403 0 22.675 0z"/></svg>
+        <div class="flex items-center gap-3.5 text-[#cba358]">
+            <a href="https://www.facebook.com/RadioNabra/" target="_blank" class="hover:text-[#e0c38c] transition transform hover:scale-110" aria-label="صفحتنا على فيسبوك">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.324V1.325C24 .597 23.403 0 22.675 0z"/></svg>
             </a>
-            <a href="https://wa.me/201017485038" target="_blank" class="hover:text-[#b8914b] transition transform hover:scale-110" aria-label="تواصل معنا عبر واتساب" title="WhatsApp">
-                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <a href="https://wa.me/201017485038" target="_blank" class="hover:text-[#e0c38c] transition transform hover:scale-110" aria-label="تواصل معنا عبر واتساب">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
             </a>
         </div>
         
-        <!-- Slogan & Theme Toggle (Right Side RTL) -->
+        <!-- Slogan & Advanced Sliding Theme Toggle -->
         <div class="flex items-center gap-4">
-            <div class="font-medium tracking-wide hidden sm:block">صوت الصحافة للمقالات والبودكاست</div>
             
-            <!-- Interactive Theme Toggle Button (Driven by main.js) -->
-            <button id="theme-toggle" type="button" aria-label="تبديل وضع الألوان" class="text-gray-500 hover:text-[#cba358] focus:outline-none focus:ring-2 focus:ring-[#cba358] rounded-full text-sm p-1.5 transition-all duration-500">
-                <!-- Sun Icon (Hidden by default, shown in dark mode) -->
-                <svg id="theme-toggle-light-icon" class="hidden w-4 h-4 transform transition-transform duration-500 hover:rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-                <!-- Moon Icon (Shown by default in light mode) -->
-                <svg id="theme-toggle-dark-icon" class="hidden w-4 h-4 transform transition-transform duration-500 hover:-rotate-12" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <!-- Slogan: Pure White & Bold -->
+            <div class="font-semibold tracking-wide hidden sm:block text-gray-900 dark:text-white">صوت الصحافة للمقالات والبودكاست</div>
+            
+            <!-- Super Premium Sliding Pill Toggle -->
+            <button id="theme-toggle" type="button" dir="ltr" aria-label="تبديل وضع الألوان" class="relative inline-flex h-8 w-16 shrink-0 cursor-pointer items-center rounded-full bg-gray-800 transition-colors duration-500 focus:outline-none focus:ring-2 focus:ring-[#cba358]/50 shadow-inner border border-gray-700 overflow-hidden">
+                
+                <!-- Decorative Background (Clouds in Day / Stars in Night) -->
+                <span class="absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-500">
+                    <!-- Light mode clouds -->
+                    <svg class="absolute bottom-0.5 right-1.5 w-4 h-4 text-white opacity-80 dark:opacity-0 transition-opacity duration-500" fill="currentColor" viewBox="0 0 24 24"><path d="M17.5 19c2.485 0 4.5-2.015 4.5-4.5S19.985 10 17.5 10c-.17 0-.338.01-.502.028C16.326 7.151 13.882 5 11 5 7.686 5 5 7.686 5 11c0 .193.01.383.028.572C2.804 12.062 1 14.07 1 16.5 1 19.538 3.462 22 6.5 22h11z"/></svg>
+                    <!-- Dark mode stars -->
+                    <span class="absolute top-2 left-2.5 w-1 h-1 bg-white rounded-full opacity-0 dark:opacity-90 transition-opacity duration-500 shadow-[0_0_2px_#fff]"></span>
+                    <span class="absolute top-4 left-5 w-0.5 h-0.5 bg-white rounded-full opacity-0 dark:opacity-70 transition-opacity duration-500"></span>
+                    <span class="absolute top-2 left-7 w-1 h-1 bg-white rounded-full opacity-0 dark:opacity-100 transition-opacity duration-500 shadow-[0_0_2px_#fff]"></span>
+                </span>
+
+                <!-- The Sliding Thumb (Contains both Sun and Moon) -->
+                <span class="flex items-center justify-center h-6 w-6 transform rounded-full bg-white shadow-md transition-transform duration-500 translate-x-1 dark:translate-x-9 relative z-10">
+                    
+                    <!-- Sun Icon (Visible in Light Mode) -->
+                    <svg class="w-4 h-4 text-yellow-500 transition-all duration-500 opacity-100 rotate-0 dark:opacity-0 dark:rotate-90 absolute" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                    </svg>
+                    
+                    <!-- Moon Icon (Visible in Dark Mode) -->
+                    <svg class="w-4 h-4 text-[#cba358] transition-all duration-500 opacity-0 -rotate-90 dark:opacity-100 dark:rotate-0 absolute" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </span>
+                
+                <!-- Hidden elements to keep your existing Javascript logic working -->
+                <span id="theme-toggle-light-icon" class="hidden"></span>
+                <span id="theme-toggle-dark-icon" class="hidden"></span>
             </button>
         </div>
+        
     </div>
 </div>
 
 <!-- ==========================================
      2. Main Navbar (Sticky)
      ========================================== -->
-<nav class="bg-white shadow-xs sticky top-0 z-50 w-full overflow-x-hidden border-b border-gray-100">
+<nav class="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 w-full overflow-x-hidden border-b border-gray-200 dark:border-gray-800 transition-colors duration-400">
     <div class="container mx-auto px-3 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-14 sm:h-16">
+        <div class="flex justify-between items-center h-14 sm:h-16 lg:h-18">
             
             <!-- Branding & Mobile Menu Toggle -->
             <div class="flex items-center gap-3">
                 <!-- Hamburger Menu Button (Visible only on mobile/tablet) -->
-                <button id="menu-toggle" type="button" aria-label="القائمة الرئيسية" class="lg:hidden text-gray-600 hover:text-[#cba358] focus:outline-none p-1" title="Menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <button id="menu-toggle" type="button" aria-label="القائمة الرئيسية" class="lg:hidden text-gray-700 dark:text-gray-300 hover:text-[#cba358] focus:outline-none focus:ring-2 focus:ring-[#cba358] rounded-md p-1" title="Menu">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
 
                 <!-- Brand Logo & Title -->
-                <div class="flex-shrink-0 flex items-center">
+                <div class="flex-shrink-0 flex items-center pt-1">
                     <a href="{% url 'home:index' %}" class="group flex items-center gap-2 sm:gap-3 transition">
-                        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden shadow-sm border border-gray-100 group-hover:shadow-md group-hover:scale-105 transition-all duration-300">
+                        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 group-hover:shadow-md group-hover:scale-105 transition-all duration-300">
                             <img src="{% static 'images/main_logo.webp' %}" alt="لوجو راديو نبرة" class="w-full h-full object-cover">
                         </div>
-                        <div class="text-lg sm:text-2xl font-black text-gray-800 tracking-tighter group-hover:text-[#cba358] transition duration-300 flex items-center gap-1">
+                        <div class="text-xl sm:text-2xl lg:text-3xl font-black text-gray-900 dark:text-white tracking-tighter group-hover:text-[#cba358] dark:group-hover:text-[#cba358] transition duration-300 flex items-center gap-1.5 pt-1">
                             <span class="text-[#cba358]">راديو</span> نبرة
                         </div>
                     </a>
                 </div>
             </div>
             
-            <!-- 
-              Desktop Links (Dynamic Active States)
-              PRO-TIP: Using `request.resolver_match` intelligently highlights the active link
-              based on the current Django view/app name without needing JavaScript.
-            -->
-            <div class="hidden lg:flex space-x-6 space-x-reverse items-center text-xs font-semibold">
-                <a href="{% url 'home:index' %}" class="inline-block transition-all duration-300 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.view_name == 'home:index' %} text-[#cba358] border-b-2 border-[#cba358] pb-1 {% else %} text-gray-600 hover:text-[#cba358] {% endif %}">
+            <!-- Desktop Links (Dynamic Active States) -->
+            <div class="hidden lg:flex gap-7 items-center text-[13px] lg:text-[14px] font-semibold">
+                <a href="{% url 'home:index' %}" class="inline-block transition-all duration-300 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.view_name == 'home:index' %} text-[#cba358] border-b-2 border-[#cba358] pb-1.5 {% else %} text-gray-800 dark:text-gray-200 hover:text-[#cba358] dark:hover:text-[#cba358] {% endif %}">
                     الرئيسية
                 </a>
                 
-                <a href="{% url 'podcasts:list' %}" class="inline-block transition-all duration-300 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'podcasts' %} text-[#cba358] border-b-2 border-[#cba358] pb-1 {% else %} text-gray-600 hover:text-[#cba358] {% endif %}">
+                <a href="{% url 'podcasts:list' %}" class="inline-block transition-all duration-300 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'podcasts' %} text-[#cba358] border-b-2 border-[#cba358] pb-1.5 {% else %} text-gray-800 dark:text-gray-200 hover:text-[#cba358] dark:hover:text-[#cba358] {% endif %}">
                     البودكاست
                 </a>
                 
-                <a href="{% url 'articles:list' %}" class="inline-block transition-all duration-300 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'articles' %} text-[#cba358] border-b-2 border-[#cba358] pb-1 {% else %} text-gray-600 hover:text-[#cba358] {% endif %}">
+                <a href="{% url 'articles:list' %}" class="inline-block transition-all duration-300 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'articles' %} text-[#cba358] border-b-2 border-[#cba358] pb-1.5 {% else %} text-gray-800 dark:text-gray-200 hover:text-[#cba358] dark:hover:text-[#cba358] {% endif %}">
                     مقالات
                 </a>
                 
-                <a href="{% url 'home:about' %}" class="inline-block transition-all duration-300 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.view_name == 'home:about' %} text-[#cba358] border-b-2 border-[#cba358] pb-1 {% else %} text-gray-600 hover:text-[#cba358] {% endif %}">
+                <a href="{% url 'home:about' %}" class="inline-block transition-all duration-300 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.view_name == 'home:about' %} text-[#cba358] border-b-2 border-[#cba358] pb-1.5 {% else %} text-gray-800 dark:text-gray-200 hover:text-[#cba358] dark:hover:text-[#cba358] {% endif %}">
                     من نحن
                 </a>
                 
-                <a href="{% url 'home:contact' %}" class="inline-block transition-all duration-300 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.view_name == 'home:contact' %} text-[#cba358] border-b-2 border-[#cba358] pb-1 {% else %} text-gray-600 hover:text-[#cba358] {% endif %}">
+                <a href="{% url 'home:contact' %}" class="inline-block transition-all duration-300 ease-in-out hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.view_name == 'home:contact' %} text-[#cba358] border-b-2 border-[#cba358] pb-1.5 {% else %} text-gray-800 dark:text-gray-200 hover:text-[#cba358] dark:hover:text-[#cba358] {% endif %}">
                     تواصل معنا
                 </a>
             </div>
             
-            <!-- 
-              Animated Search Component
-              TODO: Currently targets 'articles:list'. Future enhancement: Create a global 
-              search view that queries across both Articles and Podcasts models.
-            -->
+            <!-- Animated Search Component -->
             <div class="flex items-center gap-2">
                 <div class="flex items-center gap-1.5 relative" id="search-wrapper">
-                    <form action="{% url 'articles:list' %}" method="GET" id="search-form" class="overflow-hidden transition-all duration-300 ease-out w-0 opacity-0 flex items-center bg-gray-50 rounded-full border border-gray-200 py-0.5 px-2">
-                        <input type="text" name="q" id="search-input" value="{{ request.GET.q|default:'' }}" aria-label="البحث في الموقع" class="bg-transparent text-gray-700 text-xs block w-24 sm:w-36 py-1 px-1 outline-none placeholder-gray-400" placeholder="ابحث...">
+                    <form action="{% url 'articles:list' %}" method="GET" id="search-form" class="overflow-hidden transition-all duration-400 ease-out w-0 opacity-0 flex items-center bg-gray-100 dark:bg-gray-800 rounded-full border border-gray-200 dark:border-gray-700 py-0.5 px-2 hover:border-[#cba358]/50 focus-within:border-[#cba358]/70 focus-within:ring-1 focus-within:ring-[#cba358]/50">
+                        <input type="text" name="q" id="search-input" value="{{ request.GET.q|default:'' }}" aria-label="البحث في الموقع" class="bg-transparent text-gray-800 dark:text-gray-100 text-xs sm:text-[13px] block w-28 sm:w-40 lg:w-48 py-1.5 px-1 outline-none placeholder-gray-400 dark:placeholder-gray-500" placeholder="ابحث...">
                     </form>
                     
-                    <button id="search-toggle" type="button" aria-label="فتح حقل البحث" class="text-gray-400 hover:text-[#cba358] transition rounded-full shrink-0 p-1 bg-white relative z-10" title="Search">
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <button id="search-toggle" type="button" aria-label="فتح حقل البحث" class="text-gray-500 dark:text-gray-400 hover:text-[#cba358] dark:hover:text-[#cba358] transition rounded-full shrink-0 p-1.5 sm:p-2 bg-white dark:bg-transparent relative z-10" title="Search">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ==========================================
-         3. Mobile Navigation Menu (Drawer)
-         ========================================== -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 px-4 pt-3 pb-4 space-y-2 text-xs font-semibold shadow-lg">
+    <!-- Mobile Navigation Menu (Drawer) - REFIND White Mode Clarity -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 px-4 pt-3 pb-4 space-y-2 text-[13px] font-semibold shadow-inner transition-colors duration-400">
         
-        <a href="{% url 'home:index' %}" class="block py-2 border-b border-gray-50 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.view_name == 'home:index' %} text-[#cba358] font-bold {% else %} text-gray-600 hover:text-[#cba358] {% endif %}">
+        <a href="{% url 'home:index' %}" class="block py-2.5 border-b border-gray-200 dark:border-gray-800/60 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.view_name == 'home:index' %} text-[#cba358] font-bold {% else %} text-gray-900 dark:text-white hover:text-[#cba358] dark:hover:text-[#cba358] {% endif %}">
             الرئيسية
         </a>
         
-        <!-- TODO: Link this to the actual news view when created -->
-        <a href="#" class="block py-2 border-b border-gray-50 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] text-gray-600 hover:text-[#cba358]">
+        <a href="#" class="block py-2.5 border-b border-gray-200 dark:border-gray-800/60 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] text-gray-900 dark:text-white hover:text-[#cba358] dark:hover:text-[#cba358]">
             الأخبار
         </a>
         
-        <a href="{% url 'podcasts:list' %}" class="block py-2 border-b border-gray-50 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'podcasts' %} text-[#cba358] font-bold {% else %} text-gray-600 hover:text-[#cba358] {% endif %}">
+        <a href="{% url 'podcasts:list' %}" class="block py-2.5 border-b border-gray-200 dark:border-gray-800/60 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'podcasts' %} text-[#cba358] font-bold {% else %} text-gray-900 dark:text-white hover:text-[#cba358] dark:hover:text-[#cba358] {% endif %}">
             البودكاست
         </a>
         
-        <a href="{% url 'articles:list' %}" class="block py-2 border-b border-gray-50 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'articles' %} text-[#cba358] font-bold {% else %} text-gray-600 hover:text-[#cba358] {% endif %}">
+        <a href="{% url 'articles:list' %}" class="block py-2.5 border-b border-gray-200 dark:border-gray-800/60 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'articles' %} text-[#cba358] font-bold {% else %} text-gray-900 dark:text-white hover:text-[#cba358] dark:hover:text-[#cba358] {% endif %}">
             مقالات
         </a>
 
-        <a href="{% url 'home:about' %}" class="block py-2 border-b border-gray-50 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.view_name == 'home:about' %} text-[#cba358] font-bold {% else %} text-gray-600 hover:text-[#cba358] {% endif %}">
+        <a href="{% url 'home:about' %}" class="block py-2.5 border-b border-gray-200 dark:border-gray-800/60 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.view_name == 'home:about' %} text-[#cba358] font-bold {% else %} text-gray-900 dark:text-white hover:text-[#cba358] dark:hover:text-[#cba358] {% endif %}">
             من نحن
         </a>
         
-        <a href="{% url 'home:contact' %}" class="block py-2 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.view_name == 'home:contact' %} text-[#cba358] font-bold {% else %} text-gray-600 hover:text-[#cba358] {% endif %}">
+        <a href="{% url 'home:contact' %}" class="block py-2 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.view_name == 'home:contact' %} text-[#cba358] font-bold {% else %} text-gray-900 dark:text-white hover:text-[#cba358] dark:hover:text-[#cba358] {% endif %}">
             تواصل معنا
         </a>
     </div>
 </nav>
+
+<!-- Custom CSS for Cartoon Wobble Animation -->
+<style>
+    @keyframes wobble {
+        0%, 100% { transform: rotate(0deg); }
+        15% { transform: rotate(-5deg); }
+        30% { transform: rotate(3deg); }
+        45% { transform: rotate(-3deg); }
+        60% { transform: rotate(2deg); }
+        75% { transform: rotate(-1deg); }
+    }
+    .animate-wobble {
+        animation: wobble 6s ease-in-out infinite;
+    }
+</style>

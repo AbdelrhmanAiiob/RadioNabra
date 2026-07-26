@@ -3,6 +3,7 @@ Views for the Home application.
 Responsible for rendering the main landing page and aggregating data from other apps (Articles, Podcasts).
 """
 
+from django.shortcuts import render
 from django.views.generic import TemplateView
 from articles.models import Article
 from podcasts.models import Podcast
@@ -38,3 +39,6 @@ class IndexView(TemplateView):
         # will significantly reduce database load and improve response time.
         
         return context
+
+def coming_soon(request):
+    return render(request, 'home/coming_soon.html')

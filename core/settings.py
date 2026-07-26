@@ -23,7 +23,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Parses the string 'True'/'False' from the .env file into a Python boolean
-DEBUG = True # os.getenv('DEBUG', 'False') == 'True'
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # Defines which host/domain names this Django site can serve
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1').split(',')
@@ -182,9 +182,10 @@ UNFOLD = {
 # ==========================================
 # PRODUCTION SECURITY SETTINGS
 # ==========================================
-# TODO: Uncomment 'SECURE_SSL_REDIRECT = True' when deploying to production with an active SSL certificate.
+# TODO: Uncomment 'SECURE_SSL_REDIRECT = True' when deploying to production with an active SSL certificate. (DONE)
 
 # Ensures cookies are only sent over HTTPS
+SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
