@@ -255,3 +255,25 @@ body {
     object-fit: cover;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); 
 }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0; /* بيبدأ مخفي عشان الأنيميشن يظهره */
+}
+
+/* تأخير ظهور الكروت عشان يظهروا ورا بعض بشكل شيك */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }

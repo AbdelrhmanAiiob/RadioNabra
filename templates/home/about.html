@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-16 max-w-6xl">
+    
+    <!-- 🎙️ الجزء الأول: مقدمة من نحن -->
+    <div class="text-center mb-20 animate-fade-in-up">
+        <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 relative inline-block pb-4">
+            من نحن: <span class="text-[#cba358]">راديو نبرة</span>
+            <!-- الخط الذهبي اللي بينبض تحت العنوان -->
+            <span class="absolute bottom-0 left-0 right-0 mx-auto w-2/3 h-1 bg-[#cba358] rounded-full animate-breathe-line"></span>
+        </h1>
+        <p class="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto text-lg md:text-xl leading-relaxed mt-6 font-medium">
+            "راديو نبرة" هي منصة بث إذاعي رقمية تسعى لتقديم تجربة صوتية فريدة ومبتكرة. نهدف إلى خلق مساحة إبداعية تجمع بين الترفيه، الثقافة، والمحتوى الهادف الذي يلامس اهتمامات مستمعينا ويرافقهم أينما كانوا.
+        </p>
+    </div>
+
+    <!-- 🌟 و 🎯 الجزء الثاني: الرؤية والرسالة (كروت تفاعلية) -->
+    <div class="grid md:grid-cols-2 gap-8 mb-20">
+        <!-- كارت الرؤية -->
+        <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm hover:shadow-xl dark:shadow-none dark:hover:shadow-[0_0_20px_rgba(203,163,88,0.15)] transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700 hover:border-[#cba358] dark:hover:border-[#cba358] group animate-fade-in-up delay-100 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-[#cba358] opacity-5 rounded-bl-full transition-all duration-500 group-hover:scale-150"></div>
+            
+            <div class="w-16 h-16 bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-sm">
+                <span class="text-3xl">🌟</span>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-[#cba358] transition-colors duration-300">رؤيتنا</h3>
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-base">
+                أن نكون الصوت الأقرب للمستمع، والمنصة الرقمية الرائدة التي تجمع بين جودة الإنتاج الصوتي وتنوع الأفكار، لترك بصمة إيجابية وملهمة في عالم الإذاعة والتدوين الصوتي.
+            </p>
+        </div>
+
+        <!-- كارت الرسالة -->
+        <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm hover:shadow-xl dark:shadow-none dark:hover:shadow-[0_0_20px_rgba(203,163,88,0.15)] transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-700 hover:border-[#cba358] dark:hover:border-[#cba358] group animate-fade-in-up delay-200 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-[#cba358] opacity-5 rounded-bl-full transition-all duration-500 group-hover:scale-150"></div>
+
+            <div class="w-16 h-16 bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 shadow-sm">
+                <span class="text-3xl">🎯</span>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-[#cba358] transition-colors duration-300">رسالتنا</h3>
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-base">
+                تقديم محتوى احترافي يعتمد على الكلمة الصادقة والنبرة المؤثرة. نسعى لبناء مجتمع متفاعل من خلال برامج وإنتاجات صوتية تُكتب وتُنتج بأعلى معايير الجودة، لتكون "نبرة" هي المساحة التي تعبر عن أفكار المجتمع وتطلعاته.
+            </p>
+        </div>
+    </div>
+
+    <!-- 📻 الجزء الثالث: ماذا نقدم؟ (شبكة الخدمات) -->
+    <div class="animate-fade-in-up delay-300">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white inline-block relative pb-3">
+                ماذا نقدم؟
+                <span class="absolute bottom-0 left-0 right-0 mx-auto w-12 h-1 bg-[#cba358] rounded-full"></span>
+            </h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+            
+            <!-- خدمة 1 -->
+            <div class="flex items-start gap-4 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl hover:bg-white dark:hover:bg-gray-800 transition-colors duration-300 border border-transparent hover:border-gray-100 dark:hover:border-gray-700 group">
+                <div class="flex-shrink-0 w-12 h-12 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center shadow-sm text-[#cba358] group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 14a3 3 0 003-3V6a3 3 0 00-6 0v5a3 3 0 003 3zm5-3a1 1 0 012 0 7 7 0 01-14 0 1 1 0 012 0 5 5 0 0010 0zm-6 8v3h2v-3h-2z"/></svg>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#cba358] transition-colors">إنتاجات البودكاست</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">سلاسل صوتية حصرية ومتنوعة (مثل "همسات ليلية") تأخذ المستمع في رحلة من الكلمة والمعنى.</p>
+                </div>
+            </div>
+
+            <!-- خدمة 2 -->
+            <div class="flex items-start gap-4 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl hover:bg-white dark:hover:bg-gray-800 transition-colors duration-300 border border-transparent hover:border-gray-100 dark:hover:border-gray-700 group">
+                <div class="flex-shrink-0 w-12 h-12 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center shadow-sm text-[#cba358] group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-11H7v2h4v-2zm4 0h-2v2h2v-2z"/></svg>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#cba358] transition-colors">اسكتشات الدرامية</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">أعمال درامية إذاعية قصيرة تُضفي طابعاً حيوياً وممتعاً وتُحيي فن الدراما الصوتية.</p>
+                </div>
+            </div>
+
+            <!-- خدمة 3 -->
+            <div class="flex items-start gap-4 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl hover:bg-white dark:hover:bg-gray-800 transition-colors duration-300 border border-transparent hover:border-gray-100 dark:hover:border-gray-700 group">
+                <div class="flex-shrink-0 w-12 h-12 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center shadow-sm text-[#cba358] group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#cba358] transition-colors">برامج متنوعة</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">باقة من البرامج التي تغطي الجوانب الثقافية، الاجتماعية، والترفيهية لتناسب مختلف الأذواق.</p>
+                </div>
+            </div>
+
+            <!-- خدمة 4 -->
+            <div class="flex items-start gap-4 p-6 bg-gray-50 dark:bg-gray-800/50 rounded-2xl hover:bg-white dark:hover:bg-gray-800 transition-colors duration-300 border border-transparent hover:border-gray-100 dark:hover:border-gray-700 group">
+                <div class="flex-shrink-0 w-12 h-12 bg-white dark:bg-gray-700 rounded-full flex items-center justify-center shadow-sm text-[#cba358] group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10C22 6.48 17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-[#cba358] transition-colors">محتوى تفاعلي</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">إشراك مجتمع مستمعينا باستمرار من خلال طرح قضايا ومواضيع تهمهم وتفتح باباً للنقاش البنّاء.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock content %}
