@@ -6,8 +6,8 @@ from home.views import coming_soon
 
 urlpatterns = [
     path('nabra-control-admin', admin.site.urls),
-    path('', coming_soon, name='coming_soon'),
-    path('wait', include('home.urls'), name='home'),
+    path('coming_soon', coming_soon, name='coming_soon'),
+    path('', include('home.urls'), name='home'),
     path('articles/', include('articles.urls'), name='articles'),
     path('podcasts/', include('podcasts.urls'), name='podcasts'),
 ]
