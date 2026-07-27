@@ -142,10 +142,6 @@
             الرئيسية
         </a>
         
-        <a href="#" class="block py-2.5 border-b border-gray-200 dark:border-gray-800/60 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] text-gray-900 dark:text-white hover:text-[#cba358] dark:hover:text-[#cba358]">
-            الأخبار
-        </a>
-        
         <a href="{% url 'podcasts:list' %}" class="block py-2.5 border-b border-gray-200 dark:border-gray-800/60 transition-all duration-300 ease-in-out origin-right hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.8)] {% if request.resolver_match.app_name == 'podcasts' %} text-[#cba358] font-bold {% else %} text-gray-900 dark:text-white hover:text-[#cba358] dark:hover:text-[#cba358] {% endif %}">
             البودكاست
         </a>

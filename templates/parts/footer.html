@@ -121,74 +121,50 @@
                 <div class="grid grid-cols-2 gap-2.5">
                     
                     <!-- Item 1 (Right): PayPal -->
-                    <button onclick="copyDonateInfo('@AbdelrhmanAiiob', this)" class="relative w-full h-[65px] overflow-hidden group flex items-center justify-center bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[#cba358]/50 dark:hover:border-[#cba358]/50 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
-                        <div class="flex flex-col items-center gap-1.5 transition-transform duration-300 group-hover:-translate-y-12">
+                    <button onclick="copyDonateInfo('@AbdelrhmanAiiob', this)" class="relative w-full h-[65px] flex items-center justify-center bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[#cba358]/50 dark:hover:border-[#cba358]/50 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
+                        <div class="default-state flex flex-col items-center gap-1.5 transition-opacity duration-300">
                             <svg class="w-4 h-4 text-[#cba358]" fill="currentColor" viewBox="0 0 24 24"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.982 5.048-4.348 6.796-8.646 6.796h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106h4.606a.641.641 0 0 0 .633-.74l.526-3.337c.082-.518.526-.9 1.05-.9h1.164c4.298 0 7.664-1.748 8.646-6.796.03-.15.054-.294.078-.438.012-.07.024-.143.036-.216a4.84 4.84 0 0 0-.256-.473z"/></svg>
                             <span class="font-sans font-bold text-[10.5px] text-gray-800 dark:text-gray-200">PayPal</span>
                         </div>
-                        <div class="absolute inset-0 flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-white/95 dark:bg-gray-800/95 z-10 copy-text-overlay">
-                            <div class="default-state flex flex-col items-center justify-center">
-                                <svg class="w-3.5 h-3.5 text-[#cba358] mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                                <span class="text-[#cba358] text-[10px] font-bold">نسخ</span>
-                            </div>
-                            <div class="success-state hidden flex-col items-center justify-center">
-                                <svg class="w-3.5 h-3.5 text-green-600 dark:text-green-400 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="text-green-600 dark:text-green-400 text-[10px] font-bold">تم!</span>
-                            </div>
+                        <div class="success-state absolute inset-0 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 bg-white dark:bg-gray-800 rounded-xl">
+                            <svg class="w-4 h-4 text-green-600 dark:text-green-400 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-green-600 dark:text-green-400 text-[11px] font-bold">تم النسخ!</span>
                         </div>
                     </button>
 
                     <!-- Item 2 (Left): InstaPay -->
-                    <button onclick="copyDonateInfo('01223988592', this)" class="relative w-full h-[65px] overflow-hidden group flex items-center justify-center bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[#cba358]/50 dark:hover:border-[#cba358]/50 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
-                        <div class="flex flex-col items-center gap-1.5 transition-transform duration-300 group-hover:-translate-y-12">
+                    <button onclick="copyDonateInfo('01223988592', this)" class="relative w-full h-[65px] flex items-center justify-center bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[#cba358]/50 dark:hover:border-[#cba358]/50 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
+                        <div class="default-state flex flex-col items-center gap-1.5 transition-opacity duration-300">
                             <svg class="w-4 h-4 text-[#cba358]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                             <span class="font-sans font-bold text-[10.5px] text-gray-800 dark:text-gray-200">InstaPay</span>
                         </div>
-                        <div class="absolute inset-0 flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-white/95 dark:bg-gray-800/95 z-10 copy-text-overlay">
-                            <div class="default-state flex flex-col items-center justify-center">
-                                <svg class="w-3.5 h-3.5 text-[#cba358] mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                                <span class="text-[#cba358] text-[10px] font-bold">نسخ</span>
-                            </div>
-                            <div class="success-state hidden flex-col items-center justify-center">
-                                <svg class="w-3.5 h-3.5 text-green-600 dark:text-green-400 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="text-green-600 dark:text-green-400 text-[10px] font-bold">تم!</span>
-                            </div>
+                        <div class="success-state absolute inset-0 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 bg-white dark:bg-gray-800 rounded-xl">
+                            <svg class="w-4 h-4 text-green-600 dark:text-green-400 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-green-600 dark:text-green-400 text-[11px] font-bold">تم النسخ!</span>
                         </div>
                     </button>
 
                     <!-- Item 3 (Right): Crypto (USDT) -->
-                    <button onclick="copyDonateInfo('TQ9a8SKnJPGmZyDunCy4vEJYdpV2ZerC3E', this)" class="relative w-full h-[65px] overflow-hidden group flex items-center justify-center bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[#cba358]/50 dark:hover:border-[#cba358]/50 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
-                        <div class="flex flex-col items-center gap-1.5 transition-transform duration-300 group-hover:-translate-y-12">
+                    <button onclick="copyDonateInfo('TQ9a8SKnJPGmZyDunCy4vEJYdpV2ZerC3E', this)" class="relative w-full h-[65px] flex items-center justify-center bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[#cba358]/50 dark:hover:border-[#cba358]/50 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
+                        <div class="default-state flex flex-col items-center gap-1.5 transition-opacity duration-300">
                             <svg class="w-4 h-4 text-[#cba358]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 24c6.627 0 12-5.373 12-12S18.627 0 12 0 0 5.373 0 12s5.373 12 12 12zm0-22.255c5.665 0 10.255 4.59 10.255 10.255S17.665 22.255 12 22.255 1.745 17.665 1.745 12 6.335 1.745 12 1.745zM9.47 7.745h5.06v1.96H11.53v6.55h-2.06v-6.55H6.47v-1.96h3z"/></svg>
                             <span class="font-sans font-bold text-[10.5px] text-gray-800 dark:text-gray-200">USDT (TRC20)</span>
                         </div>
-                        <div class="absolute inset-0 flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-white/95 dark:bg-gray-800/95 z-10 copy-text-overlay">
-                            <div class="default-state flex flex-col items-center justify-center">
-                                <svg class="w-3.5 h-3.5 text-[#cba358] mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                                <span class="text-[#cba358] text-[10px] font-bold">نسخ</span>
-                            </div>
-                            <div class="success-state hidden flex-col items-center justify-center">
-                                <svg class="w-3.5 h-3.5 text-green-600 dark:text-green-400 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="text-green-600 dark:text-green-400 text-[10px] font-bold">تم!</span>
-                            </div>
+                        <div class="success-state absolute inset-0 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 bg-white dark:bg-gray-800 rounded-xl">
+                            <svg class="w-4 h-4 text-green-600 dark:text-green-400 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-green-600 dark:text-green-400 text-[11px] font-bold">تم النسخ!</span>
                         </div>
                     </button>
 
                     <!-- Item 4 (Left): Vodafone Cash -->
-                    <button onclick="copyDonateInfo('01551567002', this)" class="relative w-full h-[65px] overflow-hidden group flex items-center justify-center bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[#cba358]/50 dark:hover:border-[#cba358]/50 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
-                        <div class="flex flex-col items-center gap-1.5 transition-transform duration-300 group-hover:-translate-y-12">
+                    <button onclick="copyDonateInfo('01551567002', this)" class="relative w-full h-[65px] flex items-center justify-center bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[#cba358]/50 dark:hover:border-[#cba358]/50 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
+                        <div class="default-state flex flex-col items-center gap-1.5 transition-opacity duration-300">
                             <svg class="w-4 h-4 text-[#cba358]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                             <span class="font-sans font-bold text-[10.5px] text-gray-800 dark:text-gray-200">Vodafone Cash</span>
                         </div>
-                        <div class="absolute inset-0 flex flex-col items-center justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-white/95 dark:bg-gray-800/95 z-10 copy-text-overlay">
-                            <div class="default-state flex flex-col items-center justify-center">
-                                <svg class="w-3.5 h-3.5 text-[#cba358] mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                                <span class="text-[#cba358] text-[10px] font-bold">نسخ</span>
-                            </div>
-                            <div class="success-state hidden flex-col items-center justify-center">
-                                <svg class="w-3.5 h-3.5 text-green-600 dark:text-green-400 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="text-green-600 dark:text-green-400 text-[10px] font-bold">تم!</span>
-                            </div>
+                        <div class="success-state absolute inset-0 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 bg-white dark:bg-gray-800 rounded-xl">
+                            <svg class="w-4 h-4 text-green-600 dark:text-green-400 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-green-600 dark:text-green-400 text-[11px] font-bold">تم النسخ!</span>
                         </div>
                     </button>
 
@@ -219,52 +195,28 @@
 
 <script>
     function copyDonateInfo(text, buttonElement) {
-        // Fix #1: Correctly target the main content inside the button
-        const mainContent = buttonElement.querySelector('div:first-child');
-        const overlay = buttonElement.querySelector('.copy-text-overlay');
         const defaultState = buttonElement.querySelector('.default-state');
         const successState = buttonElement.querySelector('.success-state');
 
-        const showSuccessState = () => {
-            // Apply animations
-            if (mainContent) mainContent.style.transform = 'translateY(-3rem)';
-            if (overlay) overlay.style.transform = 'translateY(0)';
-            
-            // Fix #2: Safely swap classes to maintain layout
-            if (defaultState) {
-                defaultState.classList.remove('flex');
-                defaultState.classList.add('hidden');
-            }
-            if (successState) {
-                successState.classList.remove('hidden');
-                successState.classList.add('flex');
-            }
+        const triggerAnimation = () => {
+            // إخفاء النص الأساسي وإظهار رسالة النجاح بتلاشي ناعم
+            if (defaultState) defaultState.style.opacity = '0';
+            if (successState) successState.style.opacity = '1';
 
-            // Reset after 2 seconds
+            // العودة للحالة الأصلية بعد ثانيتين
             setTimeout(() => {
-                if (mainContent) mainContent.style.transform = '';
-                if (overlay) overlay.style.transform = '';
-                
-                if (defaultState) {
-                    defaultState.classList.remove('hidden');
-                    defaultState.classList.add('flex');
-                }
-                if (successState) {
-                    successState.classList.remove('flex');
-                    successState.classList.add('hidden');
-                }
-                
-                // Fix #3: Remove focus from the button to unstick the hover state on mobile
+                if (defaultState) defaultState.style.opacity = '1';
+                if (successState) successState.style.opacity = '0';
                 buttonElement.blur();
             }, 2000);
         };
 
         if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(showSuccessState).catch(() => {
-                fallbackCopyText(text, showSuccessState);
+            navigator.clipboard.writeText(text).then(triggerAnimation).catch(() => {
+                fallbackCopyText(text, triggerAnimation);
             });
         } else {
-            fallbackCopyText(text, showSuccessState);
+            fallbackCopyText(text, triggerAnimation);
         }
     }
 
