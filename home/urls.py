@@ -17,6 +17,7 @@ urlpatterns = [
     # This is a best practice to keep views.py clean when no complex context logic or form handling is needed.
     path('about/', TemplateView.as_view(template_name='home/about.html'), name='about'),
     path('contact/', TemplateView.as_view(template_name='home/contact.html'), name='contact'),
+    path('search/', views.global_search, name='search'),
     
     # TODO: If the Contact page later requires form handling (e.g., sending emails via a contact form), 
     # move it to a dedicated FormView or CreateView in views.py.

@@ -123,8 +123,8 @@
             <!-- Animated Search Component -->
             <div class="flex items-center gap-2">
                 <div class="flex items-center gap-1.5 relative" id="search-wrapper">
-                    <form action="{% if request.resolver_match.app_name == 'articles' %}{% url 'articles:list' %}{% else %}{% url 'podcasts:list' %}{% endif %}" method="GET" id="search-form" class="overflow-hidden transition-all duration-400 ease-out w-0 opacity-0 flex items-center bg-gray-100 dark:bg-gray-800 rounded-full border border-gray-200 dark:border-gray-700 py-0.5 px-2 hover:border-[#cba358]/50 focus-within:border-[#cba358]/70 focus-within:ring-1 focus-within:ring-[#cba358]/50">
-                        <input type="text" name="q" id="search-input" value="{{ request.GET.q|default:'' }}" aria-label="البحث في الموقع" class="bg-transparent text-gray-800 dark:text-gray-100 text-xs sm:text-[13px] block w-28 sm:w-40 lg:w-48 py-1.5 px-1 outline-none placeholder-gray-400 dark:placeholder-gray-500" placeholder="{% if request.resolver_match.app_name == 'articles' %}ابحث في المقالات...{% else %}ابحث في البودكاست...{% endif %}">
+                    <form action="{% url 'home:search' %}" method="GET" id="search-form" class="overflow-hidden transition-all duration-400 ease-out w-0 opacity-0 flex items-center bg-white dark:bg-[#1f2937] rounded-full border border-gray-300 dark:border-gray-600 py-0.5 px-2 focus-within:border-[#cba358] focus-within:ring-1 focus-within:ring-[#cba358] shadow-sm">
+                        <input type="text" name="q" id="search-input" value="{{ request.GET.q|default:'' }}" aria-label="البحث في الموقع" class="bg-transparent text-gray-900 dark:text-white text-xs sm:text-[13px] block w-32 sm:w-48 lg:w-56 py-1.5 px-2 outline-none placeholder-gray-500 dark:placeholder-gray-400" placeholder="ابحث في راديو نبرة...">
                     </form>
                     
                     <button id="search-toggle" type="button" aria-label="فتح حقل البحث" class="text-gray-500 dark:text-gray-400 hover:text-[#cba358] dark:hover:text-[#cba358] transition rounded-full shrink-0 p-1.5 sm:p-2 bg-white dark:bg-transparent relative z-10" title="Search">
