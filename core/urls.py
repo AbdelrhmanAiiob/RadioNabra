@@ -1,12 +1,13 @@
+from django.views.generic import TemplateView
+from django.http import HttpResponse
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from home.views import coming_soon
-from django.views.generic import TemplateView
 
 urlpatterns = [
-  path('googled0a8a8e73a7d08e9.html', TemplateView.as_view(template_name='googled0a8a8e73a7d08e9.html')),
+  path('googled0a8a8e73a7d08e9.html', lambda request: HttpResponse("google-site-verification: googled0a8a8e73a7d08e9.html")),
   
     path('nabra-control-admin', admin.site.urls),
     path('coming_soon', coming_soon, name='coming_soon'),
