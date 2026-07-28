@@ -199,11 +199,10 @@
         const successState = buttonElement.querySelector('.success-state');
 
         const triggerAnimation = () => {
-            // إخفاء النص الأساسي وإظهار رسالة النجاح بتلاشي ناعم
+
             if (defaultState) defaultState.style.opacity = '0';
             if (successState) successState.style.opacity = '1';
 
-            // العودة للحالة الأصلية بعد ثانيتين
             setTimeout(() => {
                 if (defaultState) defaultState.style.opacity = '1';
                 if (successState) successState.style.opacity = '0';

@@ -1,17 +1,15 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="dark"> <!-- شيل كلمة dark لو عايزها تفتح أبيض كافتراضي -->
+<html lang="ar" dir="rtl" class="dark"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>راديو نبرة - قريباً</title>
-    <!-- استدعاء ملف الـ CSS السريع اللي عملناه -->
     <link rel="stylesheet" href="{% static 'css/output.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Tajawal', sans-serif; }
         
-        /* أنيميشن موجات الراديو حوالين اللوجو */
         @keyframes pulse-wave {
             0% { box-shadow: 0 0 0 0 rgba(203, 163, 88, 0.4); }
             70% { box-shadow: 0 0 0 25px rgba(203, 163, 88, 0); }
