@@ -173,10 +173,13 @@
 
         </div>
         
-        <!-- Copyright & Developer Signature -->
+        <!-- Copyright, Privacy Policy & Developer Signature -->
         <div class="border-t border-gray-200 dark:border-gray-800 pt-3 flex flex-col sm:flex-row justify-between items-center gap-3 text-[11px] font-medium">
-            <div class="text-gray-500 dark:text-gray-500">
-                &copy; 2026 راديو نبرة. جميع الحقوق محفوظة.
+            
+            <div class="text-gray-500 dark:text-gray-500 flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3">
+                <span>&copy; 2026 راديو نبرة. جميع الحقوق محفوظة.</span>
+                <span class="hidden sm:inline-block text-gray-300 dark:text-gray-700">|</span>
+                <a href="{% url 'privacy_policy' %}" class="hover:text-[#cba358] transition-colors duration-300 text-gray-600 dark:text-gray-400">سياسة الخصوصية</a>
             </div>
             
             <div class="flex items-center gap-1.5 text-gray-500 dark:text-gray-500">

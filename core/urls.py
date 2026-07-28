@@ -16,6 +16,7 @@ sitemaps = {
 urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('googled0a8a8e73a7d08e9.html', lambda request: HttpResponse("google-site-verification: googled0a8a8e73a7d08e9.html")),
+    path('privacy-policy/', TemplateView.as_view(template_name='privacy_policy.html'), name='privacy_policy'),
   
     path('nabra-control-admin', admin.site.urls),
     path('coming_soon', coming_soon, name='coming_soon'),
