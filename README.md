@@ -13,10 +13,6 @@ A modern, bilingual web platform built specifically for podcast streaming and di
 * **Frontend:** HTML5, Tailwind CSS (CLI built), Vanilla JavaScript
 * **Database:** SQLite (Development) / Ready for PostgreSQL (Production)
 
-## 📸 Screenshots
-[Dark.png](https://postimg.cc/XXr0PS6G)
-[White.png](https://postimg.cc/4njTkLXW)
-
 ## 🚀 How to Run Locally
 
 ```bash
