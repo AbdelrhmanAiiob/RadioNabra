@@ -12,6 +12,21 @@
 
 {% block title %}{{ article.title }} | المقالات{% endblock %}
 
+{% block description %}{% if article.seo_description %}{{ article.seo_description }}{% else %}{{ article.content|striptags|truncatechars:150 }}{% endif %}{% endblock %}
+
+<!-- (Open Graph) -->
+{% block og_title %}{{ article.title }}{% endblock %}
+{% block og_description %}{% if article.seo_description %}{{ article.seo_description }}{% else %}{{ article.content|striptags|truncatechars:150 }}{% endif %}{% endblock %}
+
+{% block og_image %}
+    {% if article.image %}
+        {{ article.image.url }}
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
+
+
 {% block content %}
 <div class="max-w-4xl mx-auto mt-10 px-4 sm:px-0">
 

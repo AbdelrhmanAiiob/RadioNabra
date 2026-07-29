@@ -5,15 +5,15 @@
   =============================================================================
 -->
 <footer class="relative bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 pt-8 pb-4 overflow-hidden transition-colors duration-500">
-    
+
     <!-- Animated Top Border -->
     <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#cba358] to-transparent opacity-70 animate-[pulse_4s_ease-in-out_infinite]"></div>
 
     <div class="container mx-auto px-4 max-w-6xl">
-        
+
         <!-- 4-Column Grid Layout -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+
             <!-- Column 1: Branding -->
             <div class="space-y-3">
                 <a href="{% url 'home:index' %}" class="inline-block group">
@@ -21,14 +21,14 @@
                         <span class="text-[#cba358] transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(203,163,88,0.6)]">راديو</span> نبرة
                     </div>
                 </a>
-                
+
                 <div class="pt-1">
                     <!-- Digital Platform Badge with Bouncing Arrow -->
                     <span class="inline-flex items-center gap-1.5 mb-2 px-2.5 py-1 bg-gray-100 dark:bg-gray-800/50 rounded-md border border-gray-200 dark:border-gray-700">
                         <span class="font-bold text-gray-800 dark:text-gray-200 text-[11.5px]">منصة رقمية</span>
                         <svg class="w-3.5 h-3.5 text-[#cba358] animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
                     </span>
-                    
+
                     <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-[12px] transition-colors duration-300 hover:text-gray-800 dark:hover:text-gray-300 w-11/12">
                         نجمع بين سحر الروايات وعمق المقالات لتجربة صوتية فريدة.
                     </p>
@@ -48,7 +48,7 @@
                             <span>المقالات</span>
                         </a>
                     </li>
-                    
+
                     <li>
                         <a href="#" onclick="event.preventDefault(); alert('قريباً ستتمكن من الاشتراك ونشر مقالاتك ورواياتك مباشرة على منصة نبرة!');" class="group flex items-center justify-between text-gray-500 dark:text-gray-500 text-[12.5px] font-medium transition-all duration-300 hover:text-[#cba358] dark:hover:text-[#cba358] cursor-help w-36">
                             <div class="flex items-center gap-2">
@@ -58,7 +58,7 @@
                             <span class="text-[9px] bg-gray-100 border border-gray-200 dark:border-transparent dark:bg-gray-800 px-1.5 py-0.5 rounded text-gray-500 dark:text-gray-400 group-hover:bg-[#cba358]/10 group-hover:border-[#cba358]/30 group-hover:text-[#cba358] transition-all">قريباً</span>
                         </a>
                     </li>
-                    
+
                     <li>
                         <a href="#" onclick="event.preventDefault(); alert('جاري تجهيز استوديوهات نبرة لإطلاق أقوى برامج البودكاست و المقالات قريباً!');" class="group flex items-center justify-between text-gray-500 dark:text-gray-500 text-[12.5px] font-medium transition-all duration-300 hover:text-[#cba358] dark:hover:text-[#cba358] cursor-help w-36">
                             <div class="flex items-center gap-2">
@@ -87,7 +87,7 @@
                     التواصل المباشر
                     <span class="absolute bottom-0 right-0 w-1/3 h-[1.5px] bg-[#cba358] rounded-full transition-all duration-500 group-hover:w-full"></span>
                 </h4>
-                
+
                 <ul class="space-y-3">
                     <li>
                         <a href="mailto:radionabra@gmail.com" class="group flex items-center gap-2 text-gray-600 dark:text-gray-400 transition-all duration-300 hover:text-[#cba358] dark:hover:text-[#cba358] hover:-translate-y-0.5">
@@ -97,7 +97,7 @@
                             <span class="font-sans font-medium text-[12px]" dir="ltr">radionabra@gmail.com</span>
                         </a>
                     </li>
-                    
+
                     <li>
                         <a href="tel:+201017485038" class="group flex items-center gap-2 text-gray-600 dark:text-gray-400 transition-all duration-300 hover:text-[#cba358] dark:hover:text-[#cba358] hover:-translate-y-0.5">
                             <div class="p-1.5 rounded-md bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 group-hover:bg-[#cba358]/10 group-hover:border-[#cba358]/30 transition-colors duration-300">
@@ -112,14 +112,14 @@
             <!-- Column 4: Buy Me A Coffee (Support) -->
             <div>
                 <h4 class="font-bold text-gray-900 dark:text-white mb-4 relative flex items-center gap-2 pb-1 text-[13px] group cursor-default">
-                    ادعم المنصة 
+                    ادعم المنصة
                     <span class="text-xl animate-bounce">☕</span>
                     <span class="absolute bottom-0 right-0 w-1/2 h-[1.5px] bg-gradient-to-r from-[#cba358] to-transparent rounded-full transition-all duration-500 group-hover:w-full"></span>
                 </h4>
-                
+
                 <!-- 2x2 Grid Layout -->
                 <div class="grid grid-cols-2 gap-2.5">
-                    
+
                     <!-- Item 1 (Right): PayPal -->
                     <button onclick="copyDonateInfo('@AbdelrhmanAiiob', this)" class="relative w-full h-[65px] flex items-center justify-center bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-[#cba358]/50 dark:hover:border-[#cba358]/50 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md">
                         <div class="default-state flex flex-col items-center gap-1.5 transition-opacity duration-300">
@@ -172,16 +172,35 @@
             </div>
 
         </div>
-        
+
+        <!-- WOT Trust Badge Section (Original Unmodified) -->
+        <div class="flex justify-center items-center w-full mb-6">
+            <!-- Copy and paste this code into your website -->
+            <a id='wot-badge2' class='wot-badge_dark' href='https://www.mywot.com/scorecard/radionabra.com?wot_badge=2_black' target='_blank' >
+                <div class='wot-secured-container'>
+                    <div class='wot-shield-background'></div>
+                    <div class='wot-text-container'>
+                        <p class='wot-secured-bold'>Verified Site</p>
+                        <div class='wot-trusted-container'>
+                            <div class='wot-trusted'>Trusted by</div>
+                            <div class='wot-logo'></div>
+                        </div>
+                    </div>
+                </div>
+                <div class='wot-vertical'></div>
+                <p class='wot-report'>See Report</p>
+            </a>
+        </div>
+
         <!-- Copyright, Privacy Policy & Developer Signature -->
         <div class="border-t border-gray-200 dark:border-gray-800 pt-3 flex flex-col sm:flex-row justify-between items-center gap-3 text-[11px] font-medium">
-            
+
             <div class="text-gray-500 dark:text-gray-500 flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-3">
                 <span>&copy; 2026 راديو نبرة. جميع الحقوق محفوظة.</span>
                 <span class="hidden sm:inline-block text-gray-300 dark:text-gray-700">|</span>
                 <a href="{% url 'privacy_policy' %}" class="hover:text-[#cba358] transition-colors duration-300 text-gray-600 dark:text-gray-400">سياسة الخصوصية</a>
             </div>
-            
+
             <div class="flex items-center gap-1.5 text-gray-500 dark:text-gray-500">
                 <span>تطوير:</span>
                 <a href="mailto:abdelrhmanaiiob@gmail.com" class="group flex items-center gap-1.5 transition-all duration-300">

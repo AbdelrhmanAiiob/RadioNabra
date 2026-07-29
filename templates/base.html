@@ -14,6 +14,7 @@
       1. Anti-FOUC (Flash of Unstyled Content) Script 
       Executes synchronously before the DOM loads to apply the correct theme instantly.
     -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5433153286543364" crossorigin="anonymous"></script>
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark-mode');
@@ -21,13 +22,25 @@
             document.documentElement.classList.remove('dark-mode');
         }
     </script>
+
+    <script async src='https://static.mywot.com/website_owners_badges/websiteOwnersBadge.js'></script>
+    <meta name="wot-verification" content="790fc91f10cf4f50ae74"/>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- 2. SEO & Meta Information -->
     <meta name="author" content="Abdelrhman Aiiob">
-    <meta name="description" content="Radio Nabra - Advanced podcast and article platform built with Django">
+    <meta name="keywords" content="راديو, بودكاست, مقالات, صحافة, نبرة">
+
+    <!-- Dynamic Meta Description -->
+    <meta name="description" content="{% block description %}نجمع بين سحر الروايات وعمق المقالات لتجربة صوتية فريدة من راديو نبرة.{% endblock description %}">
+
+    <!-- Open Graph for WhatsApp, Facebook, etc. -->
+    <meta property="og:title" content="{% block og_title %}راديو نبرة{% endblock og_title %}">
+    <meta property="og:description" content="{% block og_description %}نجمع بين سحر الروايات وعمق المقالات لتجربة صوتية فريدة.{% endblock og_description %}">
+    <meta property="og:image" content="{% block og_image %}{% static 'images/default-share-image.jpg' %}{% endblock og_image %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <meta name="keywords" content="راديو, بودكاست, مقالات, صحافة, نبرة">
     
     <!--

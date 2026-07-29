@@ -12,6 +12,21 @@
 
 {% block title %}{{ podcast.title }} | البودكاست{% endblock %}
 
+<!-- Google Search -->
+{% block description %}{% if podcast.seo_description %}{{ podcast.seo_description }}{% else %}{{ podcast.description|striptags|truncatechars:150 }}{% endif %}{% endblock %}
+
+<!-- (Open Graph) -->
+{% block og_title %}{{ podcast.title }}{% endblock %}
+{% block og_description %}{% if podcast.seo_description %}{{ podcast.seo_description }}{% else %}{{ podcast.description|striptags|truncatechars:150 }}{% endif %}{% endblock %}
+
+{% block og_image %}
+    {% if podcast.cover_image %}
+        {{ podcast.cover_image.url }}
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
+
 {% block content %}
 <div class="max-w-4xl mx-auto mt-10 px-4 sm:px-0">
 
