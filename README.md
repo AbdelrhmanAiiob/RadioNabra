@@ -14,8 +14,8 @@ A modern, bilingual web platform built specifically for podcast streaming and di
 * **Database:** SQLite (Development) / Ready for PostgreSQL (Production)
 
 ## 📸 Screenshots
-*(Add a screenshot of the Light Mode here)*
-*(Add a screenshot of the Dark Mode here)*
+*(url=https://postimg.cc/XXr0PS6G][img]https://i.postimg.cc/XXr0PS6G/Screenshot-2026-07-29-152804.png[/img][/url]*
+*(url=https://postimg.cc/4njTkLXW][img]https://i.postimg.cc/4njTkLXW/Screenshot-2026-07-29-152812.png[/img][/url])*
 
 ## 🚀 How to Run Locally
 
